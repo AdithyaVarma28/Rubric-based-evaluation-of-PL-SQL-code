@@ -1,0 +1,49 @@
+
+create table Dept(
+	dept_no integer primary key,
+	dname varchar
+);
+create table Emp(
+    eno integer primary key,
+	ename varchar ,
+	sal numeric(7,2),
+	dno integer references Dept(dept_no)
+);
+--1
+create or replace function emp_sal(empno Emp.eno%type) as
+    return Emp.sal%type as  
+$$
+declare 
+	salary Emp.sal%type;
+begin 
+	select sal into salary from Emp where eno=empno;
+	return salary ;
+end;
+$$
+language 'Plpgsql';
+
+--2
+create or replace function Emp_no(depno Emp.dno%type) as 
+	return int as 
+$$
+declare 
+	empcount int
+begin
+	select count(eno) into empcount from Emp where depno=dno;
+	return empcount;
+	end
+$$ language 'plpgsql';
+
+--3
+create or replace function Sal(Empno Emp.eno%type) as 
+	return void as 
+$$
+declare 
+	salary Emp.sal%type 
+begin 
+	select sal into salary from Emp where eno=Empno;
+	if (sal<(select avg(sal) from Emp where dno=(select dno from Emp where eno.Empno)))
+	update Emp set sal=sal+sal*0.1 where eno=Empno;
+	End:
+$$
+language 'plpgsql';
