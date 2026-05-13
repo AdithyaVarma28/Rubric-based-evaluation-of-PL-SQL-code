@@ -1,0 +1,36 @@
+﻿create table Emp(eid int,ename varchar(20),salary int,job varchar(20),date_of_join date);
+create table works(eid int,did int,pct time int);
+create table dept(did int,budget int,mgrid int);
+create or replace function emp_fn()
+returns int as
+Declare
+$$
+Begin
+	emp_id cursor for select e.eid,e.salary,budget from e emp,d dept;
+	emp_fn employee%rowtype;
+	emp_fn works%rowtype;
+	emp_fn dept%rowtytpe;
+	e.eid ep_fn.eid%type;
+	e.salary emp_fn.esalry%type;
+	budjet emp_fn.budget%type
+Begin 
+	Fetch emp_fn into e.eid;
+	Fetch emp_fn into e.esalry;
+	Fetch emp_fn into budjet;
+	
+	if(e.salary>budjet) THEN
+	
+	raise notice 'not update';
+	ElSE 
+	raise notice'update';
+	e.salary=e.aalary*10/100;
+	end if;
+	close 'emp_fn';
+	return 'successfully updated';
+end;
+$$
+	language'plpgsql';
+
+	
+	
+

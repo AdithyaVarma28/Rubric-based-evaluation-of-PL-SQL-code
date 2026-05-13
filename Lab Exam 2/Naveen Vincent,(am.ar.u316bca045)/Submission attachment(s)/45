@@ -1,0 +1,62 @@
+﻿create table film(fid int,fname varchar,rel_year int,no_of_actors int,director varchar);
+
+insert into film values(1,'La la land',2014,2,'stephen');
+
+
+
+create or replace function fn_year(year int) returns varchar as
+
+$$
+Declare
+
+	year_cur cursor for select rel_year from film;
+
+	rel_yr film.rel_year %type;
+
+Begin
+	open year_cur;
+
+	fetch cursor year_cur into rel_yr;
+
+	while found
+
+		if rel_yr = year then
+		select rel_yr.fid,rel_yr.fname,rel_yr.rel_year,rel_yr.no_of_actors,rel_yr.director from film where rel_yr=year;
+		end if;
+
+	fetch next cursor year_cur into rel_yr;
+
+	end loop;
+	close cursor;
+
+	return 'a';
+end;
+$$
+
+Language 'plpgsql';		
+
+
+//without cursor:
+
+create or replace function fn_year(year int) returns varchar as
+
+$$
+Declare
+	rel_yr film.rel_year %type;
+
+Begin
+	while found
+		if rel_yr = year then
+		select fid,fname,rel_year,no_of_actors,director from film where rel_yr=year;
+		end if;
+	end loop;
+	return 'a';
+end;
+$$	
+ Language 'plpgsql';
+
+
+
+
+select fn_year(2015);
+		

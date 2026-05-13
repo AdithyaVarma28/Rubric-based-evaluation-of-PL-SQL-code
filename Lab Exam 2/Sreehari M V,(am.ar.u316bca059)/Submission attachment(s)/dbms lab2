@@ -1,0 +1,23 @@
+﻿create table EmpDept(eno int,ename varchar(15),sal int,dno int);
+
+insert into EmpDept values(101,'Sreehari',5000,555);
+insert into EmpDept values(104,'Shijo',4500,979);
+insert into EmpDept values(111,'Sreenath',3000,852);
+insert into EmpDept values(123,'Sibith',4321,999);
+
+create or replace function incresalary(deptno int,n int) returns varchar as
+$$
+declare 
+	
+	empsal EmpDept.sal%type;
+	p int;
+begin
+	p=(empsal*n)/100;
+	update EmpDept set sal=sal+p where dno=deptno;
+	return 'Updated';
+end;
+$$
+language 'plpgsql'
+
+select * from EmpDept;
+select incresalary(999,10) from EmpDept;

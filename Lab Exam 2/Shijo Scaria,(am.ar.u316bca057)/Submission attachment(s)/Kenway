@@ -1,0 +1,49 @@
+﻿create table Film(fid varchar,fname varchar,rel_year int,no_of_actors int,director varchar);
+insert into Film values('1002','Assassins creed 4',2010,17,'ubisoft edward');
+insert into Film values('1003','X men',2011,16,'activision Du casse');
+insert into Film values('1004','Home alone 2',2012,7,'Columbia Torres');
+insert into Film values('1005','speed',2013,2,'Welgate mary');
+insert into Film values('1006','Jumanji',2014,6,'activision Walpole');
+insert into Film values('1007','Cars 2',2015,22,'ubisoft caroline');
+
+select * from film;
+
+drop table film;
+
+create table Hello(fid varchar,fname varchar,rel_year int,no_of_actors int,director varchar);
+drop table hello;
+create or replace function Year_search(ola int)
+ returns varchar as
+
+   $$
+    Declare
+            year film.rel_year%TYPE;
+            were varchar;
+
+    Begin
+           Raise notice 'Enter an Year Please';
+           year:=ola ;
+
+           select fname from Film into were where rel_year= year;
+           return were;
+    End;
+
+    $$
+       language 'plpgsql';
+
+
+select Year_search(2012);
+
+
+
+     
+           
+
+
+
+
+
+
+
+
+                                

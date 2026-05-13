@@ -1,0 +1,38 @@
+﻿create table emp_deept12(eno int primary key,ename varchar(20),sal numeric(10,3),dno int);
+insert into emp_deept12 values(1,'sreejesh',4000,1);
+insert into emp_deept12 values(2,'sreenath',1000,1);
+insert into emp_deept12 values(3,'sreehari',1000,1);
+insert into emp_deept12 values(4,'sree',1000,1);
+
+create or replace function incriment_sal(d_no int,n int)
+returns varchar as
+$$
+declare
+sal_cu cursor for select sal from emp_deept12 where dno=d_no;
+c_sal emp_deept12.sal%type;
+avg numeric (10,3);
+total numeric(10,3);
+m int;
+begin
+total:=0.000;
+select count(eno) into m from emp_deept12 where dno=d_no ;
+open sal_cu;
+fetch sal_cu into c_sal;
+while found
+loop
+total:=total+c_sal;
+avg:=(total/m)*n/100;
+update emp_deept12 set sal=sal+avg where d_no=dno;
+fetch next from sal_cu into c_sal;
+end loop;
+return 'updated';
+end;
+$$
+language'plpgsql';
+ select incriment_sal(1,21);
+ select * from emp_deept12 ;
+
+
+
+
+

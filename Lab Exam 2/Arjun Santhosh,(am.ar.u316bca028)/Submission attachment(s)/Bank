@@ -1,0 +1,19 @@
+﻿create table Accounts(ac_no int,cno int,ac_type varchar(20),bal_amt int,br_no varchar(20),primary key(ac_no,br_no));
+create table Branches(br_no varchar(20),br_name varchar(20),br_loc varchar(20),foreign key(br_no) references Accounts(br_no));
+create table Customers(cno int,ac_no int ,cname varchar(20),foreign key(ac_no)references Accounts(ac_no));
+
+insert into Accounts values(101,551,'FD',50000,'b15'),(102,552,'FD',75000,'b16'),(103,553,'Savings',50000,'b17'),(104,554,'FD',100000,'b18'); 
+insert into Branches values('b15','SBT','kollam'),('b16','SBI','kollam'),('b17','Syndicate','konni'),('b18','SBT','kottayam');
+insert int Customers values(551,101,'Abhijith'),(552,102,'Arjun'),(553,103,'Lekshmi'),(554,104,'Soman');
+
+create or replace funtion transfer(giver varchar2(20),receiver varchar2(20),amount int)
+return varchar As;
+$$
+declare  
+	m_cbal Accounts bal_amt%type;
+	m_bal int:=15000;
+	a_temp int;
+begin
+	IF m_cbal>m_minbal THEN
+	
+	

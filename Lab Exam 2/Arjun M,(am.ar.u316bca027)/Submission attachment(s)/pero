@@ -1,0 +1,23 @@
+﻿create table emp_sal(eno int primary key,ename varchar(25),basic_sal int,commission int, tax_amt int,sal_adv int,gross_sal int NULL,dno int);
+drop table emp_sal;
+insert into emp_sal values(1,'logan',500000,50000,20000,80000,1);
+insert into emp_sal values(2,'starwk',500000,50000,20000,80000,2);
+insert into emp_sal values(3,'deadshot',500000,50000,20000,80000,3);
+insert into emp_sal values(4,'swagger',500000,50000,20000,80000,1);
+insert into emp_sal values(5,'ghost',500000,50000,20000,80000,2);
+insert into emp_sal values(6,'magnetto',500000,50000,20000,80000,3);
+insert into emp_sal values(7,'raidengreen',500000,50000,20000,80000,1);
+
+create or replace function department(basic_sal int,commision int,tax int,sal int)
+return int as;
+$$
+declare 
+gross _salary;
+begin
+gross _salary:=basic_sal+commision-tax-sal;
+return;
+raise notice'gross salary is calculated';
+select deaprtment ();
+$$
+end;
+

@@ -1,0 +1,33 @@
+create table emp_sal(eno int,ename varchar,basic_sal int ,commision int,tax_amt int,sal_adv int,gross_sal int,dno int);
+insert into emp_sal values(100,'ram',2000,20,300,500,5000,101);
+insert into emp_sal values(102,'sam',3000,30,400,600,6000,103);
+insert into emp_sal values(100,'ram',4000,40,500,700,7000,104);
+insert into emp_sal values(100,'ram',5000,50,600,800,8000,105);
+
+select * from emp_sal;
+create or replace function gross_sal(dno int) return varchar as 
+
+$$
+Declare
+
+cur_gross cursor for select gross_sal from emp_salary where dno=dept_no;
+
+gross_sal emp_salary.gross_sal %type;
+
+Begin
+
+open emp_sal cursor;
+
+fetch emp_sal cursor into dno;
+
+while found
+
+Loop
+
+gross_sal=basic_sal+commission-tax_amount-sal_adv;
+
+update gross_sal=
+
+$$
+language'plpgsql';
+

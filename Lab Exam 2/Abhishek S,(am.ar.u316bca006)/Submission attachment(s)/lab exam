@@ -1,0 +1,32 @@
+﻿create table emp_sal(eno int,ename varchar(20),basic_sal int,commission int,tax_amt int, sal_adv int,gross_sal int null,dno int);
+
+create or replace function department_no()
+returns varchar as
+$$
+declare 
+gross_update cursor for select basic sal,commission,tax_amy,sal_adv from emp_sal;
+		emp_row emp_sal%rowtype;
+		tot_gross emp_sal.gross_sal%type;
+		
+
+	Begin
+		open gross_update;
+		fetch gross_update INTO emp_row;
+		while found
+		loop
+			gross_sal:=basic_sal+commission-tax_amt-sal_adv;
+
+			update emp_sal
+			set gross_sal=tot_gross
+			where dno=emp_row.dno;
+
+			fetch next from emp_update INTO emp_row;
+
+		end loop;
+		close emp_update;
+		return 'SUCCESSFULLY UPDATED';
+
+	End;
+$$
+	language'plpgsql';
+		

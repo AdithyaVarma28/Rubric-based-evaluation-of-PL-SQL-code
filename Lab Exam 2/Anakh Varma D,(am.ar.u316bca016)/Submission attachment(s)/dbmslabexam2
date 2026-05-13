@@ -1,0 +1,42 @@
+create table Accounts(ac_no varchar primary key,cno varchar,ac_type varchar,bal_amt varchar,br_no varchar);
+
+insert into Accounts values('a101','c101','GOLD','50000','b101');
+insert into Accounts values('a102','c102','DAIMOND','45000','b102');
+insert into Accounts values('a103','c103','Silver','55000','b103');
+insert into Accounts values('a104','c104','Bronze','25000','b014');
+
+create table Branches(br_no varchar,br_name_loc varchar);
+
+insert into Branches values('b101','TVM');
+insert into Branches values('b102','TVM');
+insert into Branches values('b103','TVM');
+insert into Branches values('b104','TVM');
+
+create table Customers(cno varchar,ac_no varchar,cname varchar);
+
+insert into Customers values('c101','a101','ABC');
+insert into Customers values('c012','a102','DEF');
+insert into Customers values('c103','a103','GHI');
+insert into Customers values('c104','a104','JKL');
+
+
+create function transfer(giver varchar,reciever varchar,amount int) returns varchar as
+$$
+
+declare 
+
+acno Accounts.ac_no%type;
+bal Accounts.bal_amt%type;
+
+begin
+bal=bal-1000;
+
+
+end;
+
+$$
+
+language 'plpgsql'
+
+
+

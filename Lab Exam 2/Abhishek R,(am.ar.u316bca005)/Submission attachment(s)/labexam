@@ -1,0 +1,35 @@
+﻿create table film(fid int,fname varchar(30),rel_year int,no_of_actors int,director varchar(30));	
+drop table film;    
+
+
+insert into film values(001,'ovs',2010,2,'vineeth');           
+insert into film values(002,'hb',2010,4,'lal');                                                                          
+insert into film values(003,'jsr',2014,4,'jose');  
+
+
+
+
+create or replace function accept(y int)
+returns varchar as
+$$
+declare
+	cur_n cursor for select fname from film;
+	y film.rel_year%type;
+	f_name film.fname%type;
+begin
+	open cur_n;
+	loop
+	fetch cur_n into y;
+	select fname into f_name from film 
+	where film.rel_year=y;
+	return f_name;
+	end loop;
+	close cur_n;
+end;
+$$
+language 'plpgsql';
+
+
+
+
+select accept(2010);

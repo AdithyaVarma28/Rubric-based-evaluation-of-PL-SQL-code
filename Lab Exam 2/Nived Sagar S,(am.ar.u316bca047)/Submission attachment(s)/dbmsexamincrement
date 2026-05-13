@@ -1,0 +1,34 @@
+﻿create table Emp_Dept(eno int primary key,ename varchar(20),sal numeric(8,1),dno varchar(2));
+insert into Emp_Dept(eno,ename,sal,dno) values(111,'nived',10000,'a1'),(222,'amith',20000,'a2'),(333,'aiswarys',100000,'a3'),(444,'anagha',45000,'a2');
+
+
+create or replace function INCREMENT_SALARY(Deptno Emp_Dept.dno%type,N int)
+returns varchar AS
+$$
+Declare
+increment_salary cursor for select eno from Emp_Dept where dno=Deptno;
+Empno Emp_dept.eno%type;
+Salary Emp_Dept.sal%type;
+EmpSalary Emp_Dept.sal%type;
+
+Begin
+select AVG(sal) into Salary from Emp_Dept group by dno having dno=Deptno;
+open increment_salary;
+FETCH increment_salary into Empno;
+while FOUND
+LOOP
+
+select sal into EmpSalary from Emp_Dept where eno=Empno;
+EmpSalary:=EmpSalary+((Salary*N)/100);
+update Emp_Dept set salary=EmpSalary where eno=Empno;
+FETCH NEXT FROM increment_salary into Empno;
+END LOOP;
+
+close increment_salary;
+return 'DONE';
+END;
+$$
+
+language 'plpgsql';
+select INCREMENT_SALARY('a1',30);
+select * from Emp_Dept;

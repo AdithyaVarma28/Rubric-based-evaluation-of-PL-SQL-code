@@ -1,0 +1,27 @@
+﻿create table emp_sal(eno numeric,ename varchar(20),basic_sal numeric,commission numeric,tax_amt numeric,sal_adv numeric,gross_sal numeric,dno varchar);
+insert into emp_sal values(101,'sree',50000,2000,5000,10000,NULL,'d1')
+insert into emp_sal values(102,'ashish',60000,3000,6000,12000,NULL,'d1');
+insert into emp_sal values(103,'ahsan',55000,2500,5500,12500,NULL,'d3');
+create or replace function gross_salary(dept_no numeric) returns numeric as
+$$
+	Declare
+	
+		gross_sala numeric;
+		basic_sala numeric;
+		commission_amt numeric;
+		tax_amount numeric;
+		sal_advance numeric;
+	Begin
+	
+		select dno from emp_sal into dept_no;
+		select basic_sal from emp_sal into basic_sala;
+		select commission from emp_sal into commission_amt;
+		select tax_amt from emp_sal into tax_amount;
+		select sal_adv from emp_sal into sal_advance; 
+		gross_sala=basic_sala+commission_amt-tax_amount-sal_adv;
+		
+	End;
+	
+$$
+language 'plpgsql';
+select 

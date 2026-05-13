@@ -1,0 +1,22 @@
+﻿create table emp_dept(eno varchar,ename varchar,sal int,dno varchar);
+select * from emp_dept;
+
+create or replace function increment_salary(dept_no int,inc_percentage int)
+$$
+declare
+dept_no dno% type;
+perc int;
+begin 
+select sum(sal) from emp_dept where eno=dno;
+select count(eno) from emp_dept;
+perc=sum(sal)/count(eno);
+perc+=inc_percentage;
+update sal from emp_dept 
+set sal+=sal*perc/100
+where dept_no=dno;
+end;
+$$
+language 'plpgsql';
+
+
+select * from emp_dept(d1,2);

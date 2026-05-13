@@ -1,0 +1,49 @@
+﻿create table emp(eid int,ename varchar(15),salary int,job varchar(15),date_of_join,date);
+create table works(eid int,did int,pct_time int);
+create table dept(did int,budject int,mgrid int);
+
+insert into emp values(0111,"jack",15000,"salaesman",1992-04-02);
+insert into emp values(0111,"ezio",15000,"salaesman",1992-09-10);
+insert into emp values(0111,"edward kenway",15000,"salaesman",1990-02-08);
+insert into emp values(0111,"ash",15000,"salaesman",1994-07-05);
+
+insert into table works values(0221,0231,5);
+insert into table works values(0221,0251,4);
+insert into table works values(0221,0241,6);
+insert into table works values(0221,0221,3);
+
+insert into dept values(0221,10000,0215);
+insert into dept values(0241,16000,0216);
+insert into dept values(0251,25000,0217);
+insert into dept values(0231,10000,0218);
+
+create or replace function employee(eid int) return varchar as
+$$
+declare
+
+
+begin
+
+
+end;
+$$
+language'plpsql'
+select *from emp
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

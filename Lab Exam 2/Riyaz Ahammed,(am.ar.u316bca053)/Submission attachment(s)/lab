@@ -1,0 +1,28 @@
+﻿create table Emp_dep(eno varchar(5) primary key,ename varchar(25),sal numeric(6,2),dno varchar(5));
+insert into Emp_dep values('E001','Rohith',5360,'D1');
+insert into Emp_dep values('E002','Ezhil',4580,'D2');
+insert into Emp_dep values('E003','Balan',3000,'D1');
+insert into Emp_dep values('E004','Arjn',5000,'D3');
+select * from Emp_dep;
+
+create or replace function increment_salary(dn int, n int)returns varchar as
+$$
+	Declare 
+		dn Emp_dep.dno% type;
+		avg number;
+		salary Emp_dep.sal% type;
+	Begin
+		select avg(sal) into avg from Emp_dep;
+		for i in 1..4
+		loop
+			salary:=Emp_dep.sal*(avg/100);
+		end loop;
+		update Emp_dept set sal=sal+salary where dn=dno;
+		return 'Table Updated';
+	END
+$$
+	language 'plpgsql'
+select increament_salary('D1',25);
+
+
+

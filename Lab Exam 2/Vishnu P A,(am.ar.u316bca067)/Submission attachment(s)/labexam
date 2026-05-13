@@ -1,0 +1,31 @@
+﻿create table film(fid  int,fname varchar,rel_year int,no_of_actors int,director varchar);
+insert into film values(1,'kingkong',2016,10,'John Abhram');
+insert into film values(2,'beauty and beast',2017,12,'John Honay');
+insert into film values(3,'intersellar',2016,6,'Chistoper Nolan');
+insert into film values(4,'Hacksaw ridge',2017,12,'Andrews');
+insert into film values(5,'dark knight',2013,10,'Chistoper Nolan');
+insert into film values(6,'jacky chan',2013,8,'Shang shu Chan');
+select * from film;
+
+
+create or replace function print(rel_year int)
+	returns  varchar as
+$$
+  declare
+	year int;
+  begin
+     IF year=rel_year then 
+       loop
+        year:=rel_year;
+       select * from film;
+         else 
+        return 'not found';
+        end loop;
+         end IF;
+         return 'found';
+     end;
+$$
+
+  language 'plpgsql';
+  
+select  print(2016);

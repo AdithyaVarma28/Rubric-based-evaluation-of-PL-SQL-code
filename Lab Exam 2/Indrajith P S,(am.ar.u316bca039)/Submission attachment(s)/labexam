@@ -1,0 +1,42 @@
+Create table Emp_dept(eno int,ename  varchar(20),sal int,dno int); 
+Insert into Emp_dept values(1,'Rohith',30000,2);
+Insert into Emp_dept values(2,'Arjun',35000,2);
+Insert into Emp_dept values(3,'Naveen',40000,1);
+Insert into Emp_dept values(4,'Mahesh',45000,1);
+
+
+Create or replace function increment_salary(dept_no int,n int) returns int AS
+
+$$
+declare
+
+emp cursor for Select salary from Emp_dept where dept_no=dno;
+dept_no Emp_dept.dno%type
+
+begin
+
+
+raise notice'Enter n';
+
+open cursor emp;
+
+Fetch emp into dept_no;
+while found
+LOOP
+
+fetch next from emp into dept_no;
+END LOOP;
+close emp;
+return total_sal;
+END;
+$$
+language 'plpgsql';
+
+
+
+
+
+
+
+
+

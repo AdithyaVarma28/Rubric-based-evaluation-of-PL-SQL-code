@@ -1,0 +1,36 @@
+﻿create table emp(eid varchar(20),ename varchar(20),salary varchar(20),job varchar(20),date_of_join date);
+create table works(eid varchar(20),did varchar(20),pct_time varchar(20));
+create table dept(did varchar(20),budget varchar(20),mgrid varchar(20));
+
+insert into emp values (101,'Rohith',10000,'Manager','10-02-2016');
+insert into emp values (102,'Fajaz',14000,'DS','08-04-2015');
+
+alter table emp add primary key(eid);
+alter table works add primary key(did);
+alter table works add foriegn key f_key (eid) references emp (eid);
+alter table dept add foriegn key f_fkey (did) references works (did);
+
+create or replace function emp_sal(id int)
+returns integer As
+$$
+declare
+cur_sal cursor for select eid,did,budget,salary from emp,dept;
+id emp.eid%type;
+new_sal int;
+
+Begin
+open cur_sal;
+fetch cur_sal into id;
+if(sum(new_sal)>budget)
+then
+
+	update salary set salary=salary+10/100;
+End if;
+close cur_sal;
+end;
+$$
+
+language 'plpgsql';
+
+
+select emp_sal(101);

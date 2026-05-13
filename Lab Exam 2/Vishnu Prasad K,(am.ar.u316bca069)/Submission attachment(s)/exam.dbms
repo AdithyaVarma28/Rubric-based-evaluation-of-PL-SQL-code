@@ -1,0 +1,17 @@
+﻿create table accounts69(ac_no int primary key,ac_type varchar(20),bal_amnt varchar(20),br_no int);
+insert into accounts69 values('111','fixed','20000','100'),('222','deposit','10000','200'),('333','temporary','15000','300');
+create table branches69(br_no int primary key,br_name_loc varchar(20));
+insert into branches69 values('100','vallicavu'),('200','mavelikara');
+create table customers69(cno int primary key,ac_no int,cname varchar(20));
+insert into customers69 values('101','111','rashid'),('102','222','vishnu'),('103','333','vivek');
+select * from customers69;
+
+create or replace function fn_transfer(a varchar,b varchar,int)
+returns varchar as
+$$
+    Declare;
+     int ac_no,ac_type varchar,bal_amnt varchar,br_no;
+    Begin
+
+    
+

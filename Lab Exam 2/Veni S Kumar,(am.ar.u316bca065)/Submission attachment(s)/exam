@@ -1,0 +1,27 @@
+﻿create table Empy_sal(eno varchar(10),ename varchar(10),basic_sal int, commisssion int,tax_amt int,sal_adv int,gross_sal int,dno varchar(10));
+insert into Empy_sal values('e1','kukku','45000','500','2000','5000','230','d1');
+insert into Empy_sal values('e2','tukku','40000','400','1100','7000','250','d2');
+insert into empy_sal values('e3','mikku','50000','800','2100','4000','230','d3');
+insert into empy_sal values('e4','takku','47000','600','1200','3000','270','d4');
+insert into empy_sal values('e5','balu','35000','550','2200','1400','250','d5');
+select*from empy_sal;
+
+
+create or replace function emply_sal(dno varchar,gross_sal int)returns int as
+$$
+ declare 
+   gross_sal=basic_sal+commission-tax_amt-sal_adv;
+   gross_sal cursor for select gross_sal from emply_sal;
+   deptno dno %rowtype;
+   gross_sal g_sal %rowtype;
+begin
+   open gross_sal;
+   fetch gross_sal into g_sal;
+   while found
+   end;
+   language'plpgsql'
+   select emply_sal();
+   
+     
+   
+   

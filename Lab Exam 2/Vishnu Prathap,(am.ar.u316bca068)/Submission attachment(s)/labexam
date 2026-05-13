@@ -1,0 +1,22 @@
+﻿create table emp68(eid varchar(20)primary key,ename varchar(20),salary numeric(6,2),DOJ date);
+create table dept68(did varchar(20)primary key,budget numeric(6,2),mgrid varchar(20));
+drop table dept68; 
+create table works68(eid varchar(20)foreign key reference emp68(eid),did varchar(20) foreign key reference dept68(did),pct_time time);
+
+insert into emp68(eid,ename,salary,DOJ) values('e101','vishnu',6000,'12-09-2013'),('e102','kiran',1000,'12-08-2013'),('e103','manu',2000,'11-07-2013'),('e104','vinu',3000,'10-09-2014');
+
+select * from emp68;
+insert into dept68(did,budget,mgrid) values('d101',)
+
+
+
+
+create or replace function emp(eno)
+   returns varchar AS
+   $$
+   decalre
+	emp_cur cursor for select eid from emp68;
+	emp_row emp68.eid%rowtype;
+   begin
+	open emp_cur ;
+	fetch emp_cur into emp68 

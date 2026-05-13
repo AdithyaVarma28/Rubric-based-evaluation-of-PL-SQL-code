@@ -1,0 +1,40 @@
+﻿create table Emp_dept1(eno int,ename varchar(20),sal int,dno varchar(10));
+insert into Emp_dept1(eno,ename,sal,dno)values(01,'abhi',10000,'D1'),(02,'mahi',15000,'D2'),(03,'reshma',25000,'D3');
+select* from Emp_dept1;
+create or replace function INCRIMENT_SALARY(d_no varchar(10),sal_N int)
+returns varchar AS
+$$
+DECLARE
+cur_no cursor for select sal from Emp;
+Employee_dept Emp_dept row%type; 
+sal_N Emp_dept.sal%type;
+ BEGIN
+
+ open Cur_no;
+ fetch  cur_no into sal_N;
+ while found 
+ LOOP
+
+		if sal_N>10000 and sal_N<20000 then
+		
+			update Employee_dept set sal_N=sal_n+50000 where sal_N between 9000 and 20000;
+		else
+			update Employee_dept set sal_N=sal_n+1000 where sal_N>20000;
+		end if;
+		fetch next from cur_no into empsal;
+	end loop;
+	return 'Successfull';
+	end;
+	$$
+language'plpgsql';
+
+
+
+
+
+
+
+
+
+
+

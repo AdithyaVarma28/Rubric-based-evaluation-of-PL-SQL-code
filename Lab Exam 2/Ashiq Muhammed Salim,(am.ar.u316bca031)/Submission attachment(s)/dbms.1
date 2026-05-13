@@ -1,0 +1,18 @@
+﻿create table Emp_dept7(eno varchar(10),ename varchar(20),sal numeric,dno varchar(10));
+
+insert into Emp_dept7 values('u316','Athul',47000,'D120'),('u318','Mahesh',48000,'D143'),('u319','Ameen',49000,'D196'),('u314','Rohith',46000,'D178'),('u312','Aju',42000,'D114'),('u311','Unni',50000,'D132');
+select * from Emp_dept7;
+
+
+create or replace function fn_INCREMENT_SALARY(salary int)
+return int AS
+
+$$
+Declare
+N int;
+empno varchar;
+avg_sal int;
+
+
+Begin
+select 

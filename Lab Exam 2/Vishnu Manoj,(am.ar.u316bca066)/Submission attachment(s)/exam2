@@ -1,0 +1,31 @@
+﻿create table emp_dept(eno varchar(20),ename varchar(30),sal numeric(7,2),dno varchar(20));
+insert into emp_dept values('e1','vishnu',2000,'d1');
+insert into emp_dept values('e2','manu',25000,'d2');
+insert into emp_dept values('e3','madhu',12000,'d1');
+insert into emp_dept values('e4','kukku',2000,'d3');
+insert into emp_dept values('e5','sijo',23000,'d2');
+insert into emp_dept values('e6','sree',21000,'d1');
+insert into emp_dept values('e7','balu',28000,'d3');
+select* from emp_dept;
+create or replace function increment_salary(dept_no varchar,n int)returns varchar as
+$$
+declare
+	sal_up cursor for select dno,sal from  emp_dept where dno=dept_no;
+	sal_update emp_dept %rowtype;
+	up_sala emp_dept.sal%type;
+begin
+	open sal_up;
+	fetch sal_up into sal_update;
+	while found
+	loop
+	up_sala:=sal_update.sal*n/100;
+	update emp_dept set sal=up_sala where dno=sal_update.dno;
+	--fetch next into sal_up from sal_update;
+	end loop;
+	return 'table updated';
+end;
+$$
+language 'plpgsql';
+
+ select increment_salary('d1',5);
+

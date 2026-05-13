@@ -1,0 +1,36 @@
+﻿﻿create table ACCOUNTS(ac_no varchar, ac_type varchar, bal_amt numeric, br_no varchar);
+create table BRANCHES(br_no varchar, br_name_loc varchar);
+create table CUSTOMERS(cno varchar, ac_no varchar, cname varchar);
+
+drop table CUSTOMERS
+
+insert into ACCOUNTS (ac_no, ac_type, bal_amt, br_no) values ('ACOO1', 'NRI', 100000, 'BR01'), ('ACOO2', 'NRI', 130000, 'BR01'), ('ACOO3', 'NRI', 350000, 'BR02');
+insert into BRANCHES (br_no, br_name_loc) values ('BR01', 'KOLLAM'), ('BR02', 'ALAPUZHA');
+insert into CUSTOMERS (cno, ac_no, cname) values ('C001', 'AC001', 'Sreenadh'), ('C002', 'AC002', 'Sreehari'), ('C003', 'AC003', 'Shijo');
+
+create or replace function transfer (giver varchar, receiver varchar, amount numeric) returns varchar as
+$$
+	Declare
+		giver_amt numeric := 0;
+		receiver_amt numeric := 0;
+	Begin
+		select bal_amt from ACCOUNTS into giver_amt where ac_no = giver;
+		select bal_amt from ACCOUNTS into receiver_amt where ac_no = receiver;
+
+		IF giver_amt > 0 THEN
+			IF giver_amt > 1000 THEN
+				receiver_amt = receiver_amt + amount;
+				giver_amt = giver_amt - amount;
+
+				update ACCOUNTS set bal_amt = receiver_amt where ac_no = receiver;
+				update ACCOUNTS set bal_amt = giver_amt where ac_no = giver;
+			END IF;
+		END IF;
+		
+		return 'Transfer completed!';
+	End;
+$$
+language 'plpgsql';
+
+select transfer('AC001', 'AC002', 2000);
+

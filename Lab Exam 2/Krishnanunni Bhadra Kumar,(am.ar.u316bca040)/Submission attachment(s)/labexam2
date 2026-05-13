@@ -1,0 +1,31 @@
+﻿create table ACCOUNTS(ac_no int,cno int,ac_type varchar(20),bal_amt int,br_no int);
+drop table ACCOUNTS;
+create table ACCOUNTS(ac_no int primary key,cno int,ac_type varchar(20),bal_amt int,br_no int);
+create table BANCHES(br_no int,br_name_loc varchar(20));
+create table CUSTOMERS(cno int,ac_no int,cname varchar(20));
+
+insert into ACCOUNTS values(105021,001,'ABC',30000,1001);
+insert into ACCOUNTS values(105022,002,'AB',10000,1002);
+insert into ACCOUNTS values(105023,003,'AB',25000,1003);
+insert into ACCOUNTS values(105024,004,'ABC',40000,1004);
+
+insert into BRANCHES values(1001,'IBI Haripad');
+insert into BRANCHES values(1002,'ICCI Kochi');
+insert into BRANCHES values(1003,'K&K Kollam');
+insert into BRANCHES values(1004,'AGGC kannur');
+
+
+insert into CUSTOMERS values(001,105021,'Abhijith');
+insert into CUSTOMERS values(001,105021,'Amal');
+insert into CUSTOMERS values(001,105021,'Vishnu');
+insert into CUSTOMERS values(001,105021,'Yadhu');
+
+create or replace function transfer return int AS
+
+$$
+Declare
+
+
+
+
+

@@ -1,0 +1,35 @@
+﻿create table Emp_sal(eno int primary key,ename varchar,basic_sal numeric,commission numeric,tax_amt numeric,sal_adv numeric,dno int,gross_sal numeric);
+insert into Emp_sal values(1,'Hari',5000.00,50,50,1000,01);
+insert into Emp_sal values(2,'Manu',4000.00,50,40,1000,01);
+insert into Emp_sal values(3,'Kripa',6300.00,50,63,1000,01);
+insert into Emp_sal values(4,'Visal',4500.00,50,45,1000,01);
+drop table Emp_sal;
+select * from Emp_sal;
+
+create or replace function emp_fn(dept_no int) returns varchar as
+$$
+Declare 
+g_sal numeric;b_sal numeric;com numeric;t_amt numeric;adv_sal numeric;
+sal_cal cursor for select dno,basic_sal,commission,tax_amt,sal_adv from Emp_sal where dno=dept_no group by dno,basic_sal,commission,tax_amt,sal_adv;
+emp_fn Emp_sal.dno%TYPE;
+
+Begin 
+open sal_cal;
+Fetch sal_cal into emp_fn;
+while found 
+
+LOOP
+
+g_sal=b_sal+com-t_amt-adv_sal;
+update Emp_sal set gross_sal=g_sal where dno=dept_no;
+
+fetch next from sal_cal into emp_fn;
+
+End loop;
+return 'Gross Salary calculated and updated';
+close sal_cal;
+End;
+$$
+language 'plpgsql';
+
+select emp_fn(01);

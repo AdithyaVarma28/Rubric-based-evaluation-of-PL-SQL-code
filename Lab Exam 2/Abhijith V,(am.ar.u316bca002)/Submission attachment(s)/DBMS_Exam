@@ -1,0 +1,35 @@
+﻿create table Film(fid int,fname varchar(20),rel_year int,no_of_actors int,director varchar(20));
+
+insert into Film values(001,'Pulimurugan',2016,102,'Vaishakh');
+insert into Film values(002,'Oppam',2016,59,'Priyadarshan');
+insert into Film values(003,'Premam',2015,50,'Alphons puthran');
+insert into Film values(004,'Bahubali',2014,1493,'SS Rajamouli');
+insert into Film values(005,'Oozham',2016,43,'Jeethu Joseph');
+insert into Film values(006,"OK Kanmani",2013,66,"Murugan");
+
+create or replace function year(year int)
+returns varchar AS
+$$
+Declare
+	a int Film.rel_year%type;
+Begin
+	IF a:=2016 THEN
+	{
+		select * from Film where rel_year=2016;
+	}
+	IF a:=2015 THEN
+	{
+		select * from Film where rel_year=2015;
+	}
+	IF a:=2014 THEN
+	{
+		select * from Film where rel_year=2014;
+	}
+	IF a:=2013 THEN
+	{
+		select * from Film where rel_year=2013;
+	}
+END;
+$$
+language 'plpgsql';
+	

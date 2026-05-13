@@ -1,0 +1,23 @@
+﻿create table Emp(eid int,ename varchar(15),salary int,job varchar(20),date_of_join date);
+create table works(eid int,did varchar(10),pct_time varchar(15));
+create table Dept(did varchar(10),budget int,mgrid int);
+
+insert into Emp values(65789,'Aishwarya',25000,'JuniorHR','05-04-2015');
+insert into Emp values(35789,'Krishnan',15000,'Staff-As','06-02-2016');
+insert into Emp values(85789,'Srimathi',30000,'Manginghr','01-08-2016');
+insert into Emp values(15789,'Mythili',20000,'Editor','09-07-2016');
+
+
+insert into Works values(65789,'BCA2011','1week');
+insert into Works values(35789,'BCA2012','4days');
+insert into Works values(85789,'JOURN2011','2days');
+insert into Works values(15789,'BBA2010','5days');
+
+
+
+insert into Dept values('BCA2011',2000,409);
+insert into Dept values('BCA2012',500,1009);
+insert into Dept values('JOURN2011',1000,50);
+insert into Dept values('BBA2010',500,409);
+
+

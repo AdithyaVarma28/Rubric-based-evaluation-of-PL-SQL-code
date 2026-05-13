@@ -1,0 +1,28 @@
+﻿create table Emp_dept (eno varchar(10),ename varchar(20),sal numeric,dno varchar(10));
+
+insert into Emp_dept values('em3453','Arnold',23000,'dep45'),('em343','Cutler',34000,'dep34'),('em546','Reus',56000,'dep2'),('em676','Pogba',45000,'dep15');
+
+select * from Emp_dept;
+
+create or replace function fn_INCREMENT_SALARY (salary int)
+returns int as
+
+$$
+Declare
+  deptno varchar;
+  N int;
+  empno varchar;
+  avg_sal int;
+
+Begin
+select dno into deptno from Emp_dept where empno=eno; 
+
+avg_sal=sum(salary)/4;
+
+salary=N%avg_sal;
+
+salary=N+salary;
+
+END;
+$$
+language 'plpgsql';

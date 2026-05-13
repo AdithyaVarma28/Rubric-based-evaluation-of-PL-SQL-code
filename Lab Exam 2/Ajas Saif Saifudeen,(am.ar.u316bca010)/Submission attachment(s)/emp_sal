@@ -1,0 +1,31 @@
+﻿create table emp_sal(eno int primary key,ename varchar(32),basic_sal numeric(5,2),commission numeric(5,2),tax_amt numeric(5,2),gross_sal numeric(5,2) null,sal_adv numeric(5,2),dno int);  
+insert into emp_sal values(001,'Rahul',5000,100,178.50,100,null,9898);
+insert into emp_sal values(002,'Prem',5000,100,178.50,150,null,9895);
+
+
+create or replace function gross_sal() 
+returns varchar AS 
+$$
+declare
+gross_sal emp_sal.gros_sal%type;
+gross_sal cursor for select * from emp_sal;
+Begin
+open gross_sal;
+Fetch gross_sal into emp_sal;
+while found
+Loop
+Gross_sal=basic_sal+commission-tax_amt-sal_adv;
+update emp_sal set gross_sal=gross_sal where eno=emp_sal.dno;
+fetch next from gross_sal into emp_sal;
+End loop;
+close gross_sal;
+return 'updated';
+End;
+$$
+language 'plpgsql';
+
+select gross_sal();
+
+
+
+
