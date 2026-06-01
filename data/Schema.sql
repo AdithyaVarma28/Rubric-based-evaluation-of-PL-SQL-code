@@ -1,46 +1,33 @@
-CREATE TABLE Student (
-    student_id INT PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    email VARCHAR(255)
+CREATE TABLE CUSTOMER (
+    cno NUMBER NOT NULL,
+    cname VARCHAR2(100) NOT NULL,
+    c_type VARCHAR2(10) NOT NULL,
+    PRIMARY KEY (cno)
 );
 
-CREATE TABLE Teacher (
-    teacher_id INT PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
-    email VARCHAR(255)
+CREATE TABLE BRANCHES (
+    br_no NUMBER NOT NULL,
+    br_name VARCHAR2(100) NOT NULL,
+    loc VARCHAR2(80) NOT NULL,
+    PRIMARY KEY (br_no)
 );
 
-CREATE TABLE Course (
-    course_id INT PRIMARY KEY,
-    course_name VARCHAR(255) NOT NULL,
-    description TEXT
+CREATE TABLE ACCOUNTS (
+    ac_no NUMBER NOT NULL,
+    br_no NUMBER NOT NULL,
+    cust_no NUMBER NOT NULL,
+    ac_type VARCHAR2(20) NOT NULL,
+    bal NUMBER(10,2) NOT NULL,
+    PRIMARY KEY (ac_no),
+    CONSTRAINT chk_positive_balance CHECK (bal >= 0)
 );
 
-CREATE TABLE Enrollment (
-    enrollment_id INT PRIMARY KEY,
-    student_id INT NOT NULL,
-    course_id INT NOT NULL,
-    FOREIGN KEY (student_id) REFERENCES Student(student_id),
-    FOREIGN KEY (course_id) REFERENCES Course(course_id)
-);
+ALTER TABLE ACCOUNTS
+ADD CONSTRAINT fk_accounts_branches
+FOREIGN KEY (br_no)
+REFERENCES BRANCHES (br_no);
 
-CREATE TABLE Attendance (
-    attendance_id INT PRIMARY KEY,
-    student_id INT NOT NULL,
-    course_id INT NOT NULL,
-    date DATE NOT NULL,
-    present BOOLEAN NOT NULL,
-    FOREIGN KEY (student_id) REFERENCES Student(student_id),
-    FOREIGN KEY (course_id) REFERENCES Course(course_id)
-);
-
-CREATE TABLE Marks (
-    marks_id INT PRIMARY KEY,
-    student_id INT NOT NULL,
-    course_id INT NOT NULL,
-    mark FLOAT NOT NULL,
-    FOREIGN KEY (student_id) REFERENCES Student(student_id),
-    FOREIGN KEY (course_id) REFERENCES Course(course_id)
-);
+ALTER TABLE ACCOUNTS
+ADD CONSTRAINT fk_accounts_customer
+FOREIGN KEY (cust_no)
+REFERENCES CUSTOMER (cno);

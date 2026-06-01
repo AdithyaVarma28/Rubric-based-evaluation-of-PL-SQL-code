@@ -1,0 +1,9 @@
+Consider a Bank database which includes the following tables.
+
+ACCOUNTS(ac_no, br_no, cust_no, ac_type, bal)
+BRANCHES(br_no, br_name, loc)
+CUSTOMER(cno, cname, c_type)
+
+1. Write a function that accepts a threshold value and a customer number. The program updates the c_type based on the threshold value. If balance > threshold then class A, else class B.
+2. Write a function called CloseBranch that takes two arguments (the branch to be closed and the branch to take over the accounts) and transfers all accounts at the closing branch to the new branch and removes the closing branch.
+3. Write a function that implements a safe withdrawal operation, that only permits a withdraw if there are sufficient funds in the account to cover it.
