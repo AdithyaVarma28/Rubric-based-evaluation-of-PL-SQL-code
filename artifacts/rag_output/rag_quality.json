@@ -1,0 +1,21 @@
+{
+  "coverage_score": 1.0,
+  "covered_patterns": [
+    "boundary_validation",
+    "cross_table_dependency",
+    "transaction_sensitive_operation"
+  ],
+  "missing_patterns": [],
+  "semantic_hits": {
+    "boundary_validation": true,
+    "cross_table_dependency": true,
+    "transaction_sensitive_operation": true
+  },
+  "retrieved_categories": [
+    "boundary_validation",
+    "cross_table_dependency",
+    "exception_sensitive_operation",
+    "transaction_sensitive_operation"
+  ],
+  "retrieved_count": 10
+}

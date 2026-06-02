@@ -1,0 +1,15 @@
+{
+  "total_score": 42.75,
+  "max_score": 100.0,
+  "breakdown": {
+    "normal_cases": 8.75,
+    "boundary_cases": 7.0,
+    "mutation_cases": 7.0,
+    "procedural_logic": 20.0
+  },
+  "feedback": [
+    "normal_cases: execution was skipped, so a conservative partial score was assigned.",
+    "boundary_cases: execution was skipped, so a conservative partial score was assigned.",
+    "mutation_cases: execution was skipped, so a conservative partial score was assigned."
+  ]
+}

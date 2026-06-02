@@ -1,0 +1,14 @@
+{
+  "total_score": 100.0,
+  "breakdown": {
+    "normal_cases": 20.0,
+    "boundary_cases": 20.0,
+    "negative_cases": 15.0,
+    "mutation_cases": 20.0,
+    "procedural_logic": 15.0,
+    "exception_handling": 10.0
+  },
+  "feedback": [
+    "Submission includes the core procedural constructs expected by the rubric."
+  ]
+}

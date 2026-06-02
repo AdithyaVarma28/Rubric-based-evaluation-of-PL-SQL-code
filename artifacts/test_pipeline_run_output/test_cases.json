@@ -1,0 +1,285 @@
+[
+  {
+    "id": "normal_customer",
+    "category": "normal",
+    "title": "Normal data load for CUSTOMER",
+    "purpose": "Validate the core data path for CUSTOMER.",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (111, 'Cname 1-1', 'A');",
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (121, 'Cname 1-2', 'A');"
+    ],
+    "assertions": [
+      "Ensure CUSTOMER rows load successfully.",
+      "Validate expected business logic can consume populated CUSTOMER records."
+    ],
+    "mutation_ids": [],
+    "coverage_tags": [
+      "normal",
+      "customer"
+    ],
+    "risk_score": 0.2
+  },
+  {
+    "id": "normal_branches",
+    "category": "normal",
+    "title": "Normal data load for BRANCHES",
+    "purpose": "Validate the core data path for BRANCHES.",
+    "setup_sql": [
+      "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (211, 'Br_Name 2-1', 'Location-2');",
+      "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (221, 'Br_Name 2-2', 'Location-2');"
+    ],
+    "assertions": [
+      "Ensure BRANCHES rows load successfully.",
+      "Validate expected business logic can consume populated BRANCHES records."
+    ],
+    "mutation_ids": [],
+    "coverage_tags": [
+      "normal",
+      "branches"
+    ],
+    "risk_score": 0.2
+  },
+  {
+    "id": "normal_accounts",
+    "category": "normal",
+    "title": "Normal data load for ACCOUNTS",
+    "purpose": "Validate the core data path for ACCOUNTS.",
+    "setup_sql": [
+      "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (311, 211, 111, 'A', 3125.0);",
+      "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (321, 221, 121, 'A', 3250.0);"
+    ],
+    "assertions": [
+      "Ensure ACCOUNTS rows load successfully.",
+      "Validate expected business logic can consume populated ACCOUNTS records."
+    ],
+    "mutation_ids": [],
+    "coverage_tags": [
+      "normal",
+      "accounts"
+    ],
+    "risk_score": 0.2
+  },
+  {
+    "id": "boundary_zero_customer",
+    "category": "boundary",
+    "title": "Zero boundary for CUSTOMER.cno",
+    "purpose": "Exercise exact-threshold and lower-bound behavior.",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (0, 'Cname 1-1', 'A');"
+    ],
+    "assertions": [
+      "Verify cno = 0 is handled according to the specification."
+    ],
+    "mutation_ids": [],
+    "coverage_tags": [
+      "boundary",
+      "cno"
+    ],
+    "risk_score": 0.5
+  },
+  {
+    "id": "negative_null_customer",
+    "category": "negative",
+    "title": "NULL rejection for CUSTOMER.cno",
+    "purpose": "Confirm required columns are validated cleanly.",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (NULL, 'Cname 1-2', 'A');"
+    ],
+    "assertions": [
+      "Expect a failure or controlled rejection when cno is NULL."
+    ],
+    "mutation_ids": [],
+    "coverage_tags": [
+      "negative",
+      "null",
+      "cno"
+    ],
+    "risk_score": 0.7
+  },
+  {
+    "id": "boundary_zero_branches",
+    "category": "boundary",
+    "title": "Zero boundary for BRANCHES.br_no",
+    "purpose": "Exercise exact-threshold and lower-bound behavior.",
+    "setup_sql": [
+      "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (0, 'Br_Name 2-1', 'Location-2');"
+    ],
+    "assertions": [
+      "Verify br_no = 0 is handled according to the specification."
+    ],
+    "mutation_ids": [],
+    "coverage_tags": [
+      "boundary",
+      "br_no"
+    ],
+    "risk_score": 0.5
+  },
+  {
+    "id": "negative_null_branches",
+    "category": "negative",
+    "title": "NULL rejection for BRANCHES.br_no",
+    "purpose": "Confirm required columns are validated cleanly.",
+    "setup_sql": [
+      "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (NULL, 'Br_Name 2-2', 'Location-2');"
+    ],
+    "assertions": [
+      "Expect a failure or controlled rejection when br_no is NULL."
+    ],
+    "mutation_ids": [],
+    "coverage_tags": [
+      "negative",
+      "null",
+      "br_no"
+    ],
+    "risk_score": 0.7
+  },
+  {
+    "id": "boundary_zero_accounts",
+    "category": "boundary",
+    "title": "Zero boundary for ACCOUNTS.ac_no",
+    "purpose": "Exercise exact-threshold and lower-bound behavior.",
+    "setup_sql": [
+      "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (0, 211, 111, 'A', 3125.0);"
+    ],
+    "assertions": [
+      "Verify ac_no = 0 is handled according to the specification."
+    ],
+    "mutation_ids": [],
+    "coverage_tags": [
+      "boundary",
+      "ac_no"
+    ],
+    "risk_score": 0.5
+  },
+  {
+    "id": "negative_null_accounts",
+    "category": "negative",
+    "title": "NULL rejection for ACCOUNTS.ac_no",
+    "purpose": "Confirm required columns are validated cleanly.",
+    "setup_sql": [
+      "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (NULL, 221, 121, 'A', 3250.0);"
+    ],
+    "assertions": [
+      "Expect a failure or controlled rejection when ac_no is NULL."
+    ],
+    "mutation_ids": [],
+    "coverage_tags": [
+      "negative",
+      "null",
+      "ac_no"
+    ],
+    "risk_score": 0.7
+  },
+  {
+    "id": "boundary_empty_state",
+    "category": "boundary",
+    "title": "Empty table state",
+    "purpose": "Check behavior when required related tables start empty.",
+    "setup_sql": [],
+    "assertions": [
+      "Validate empty-state behavior for CUSTOMER, BRANCHES before any inserts occur."
+    ],
+    "mutation_ids": [],
+    "coverage_tags": [
+      "boundary",
+      "empty"
+    ],
+    "risk_score": 0.65
+  },
+  {
+    "id": "mutation_01",
+    "category": "mutation",
+    "title": "Safe Withdrawal Equality Leak",
+    "purpose": "Reveals missing tests at the exact threshold where the account becomes zero.",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (1, 'Cname 1-1', 'A');"
+    ],
+    "assertions": [
+      "A valid withdrawal is rejected when balance equals amount.",
+      "Verify the submission resists this known fault pattern."
+    ],
+    "mutation_ids": [
+      "MUT-N003"
+    ],
+    "coverage_tags": [
+      "mutation",
+      "exception",
+      "plsql",
+      "withdrawal",
+      "boundary"
+    ],
+    "risk_score": 1.0
+  },
+  {
+    "id": "mutation_02",
+    "category": "mutation",
+    "title": "Close Branch Orphan Accounts",
+    "purpose": "Checks whether tests catch referential-integrity and ordering faults in transactional routines.",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (111, 'Cname 1-1', 'A');"
+    ],
+    "assertions": [
+      "Foreign-key failure, orphaned accounts, or partial transfer state.",
+      "Verify the submission resists this known fault pattern."
+    ],
+    "mutation_ids": [
+      "MUT-N002"
+    ],
+    "coverage_tags": [
+      "mutation",
+      "transaction",
+      "plsql",
+      "transaction",
+      "foreign_key"
+    ],
+    "risk_score": 1.0
+  },
+  {
+    "id": "mutation_03",
+    "category": "mutation",
+    "title": "Threshold Tightening",
+    "purpose": "Boundary case is excluded.",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (1, 'Cname 1-1', 'A');"
+    ],
+    "assertions": [
+      "Boundary value is rejected.",
+      "Verify the submission resists this known fault pattern."
+    ],
+    "mutation_ids": [
+      "MUT-074"
+    ],
+    "coverage_tags": [
+      "mutation",
+      "business_rule",
+      "plsql",
+      "business",
+      "threshold"
+    ],
+    "risk_score": 1.0
+  },
+  {
+    "id": "mutation_04",
+    "category": "mutation",
+    "title": "Column Reference Mutation",
+    "purpose": "Finds mapping mistakes between schema fields.",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (111, 'Cname 1-1', 'A');"
+    ],
+    "assertions": [
+      "Returned value differs.",
+      "Verify the submission resists this known fault pattern."
+    ],
+    "mutation_ids": [
+      "MUT-037"
+    ],
+    "coverage_tags": [
+      "mutation",
+      "sql",
+      "plsql",
+      "sql",
+      "column"
+    ],
+    "risk_score": 1.0
+  }
+]

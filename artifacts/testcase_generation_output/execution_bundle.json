@@ -1,0 +1,388 @@
+{
+  "schema_ddl": "\nCREATE TABLE ACCOUNTS (\n    ac_no NUMBER NOT NULL, br_no NUMBER NOT NULL, cust_no NUMBER NOT NULL, ac_type VARCHAR2(10) NOT NULL, bal NUMBER NOT NULL, PRIMARY KEY (ac_no)\n);\n\n\nCREATE TABLE BRANCHES (\n    br_no NUMBER NOT NULL, br_name VARCHAR2(50) NOT NULL, loc VARCHAR2(50) NOT NULL, PRIMARY KEY (br_no)\n);\n\n\nCREATE TABLE CUSTOMER (\n    cno NUMBER NOT NULL, cname VARCHAR2(100) NOT NULL, c_type VARCHAR2(10), PRIMARY KEY (cno)\n);\n",
+  "testcase_count": 10,
+  "testcases": [
+    {
+      "testcase_id": "TC-001",
+      "testcase_type": "edge_case",
+      "test_intent": "exact_balance_validation",
+      "target_operation": "SafeWithdrawal",
+      "risk_pattern": "rollback_failure",
+      "behavioral_focus": [
+        "transaction_consistency_test",
+        "rollback_validation"
+      ],
+      "setup_sql": [
+        {
+          "sql": "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (101, 10, 201, 'SAVINGS', 100)",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (10, 'Main Branch', 'New York')",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (201, 'John Doe', NULL)",
+          "expected_result": {}
+        }
+      ],
+      "execution_sql": [
+        {
+          "sql": "BEGIN SafeWithdrawal(101, 100); END;",
+          "expected_result": {}
+        }
+      ],
+      "assertion_sql": [
+        {
+          "sql": "SELECT bal FROM ACCOUNTS WHERE ac_no = 101",
+          "expected_result": {
+            "columns": [
+              "bal"
+            ],
+            "rows": [
+              {
+                "bal": 0
+              }
+            ]
+          }
+        }
+      ],
+      "expected_result": {}
+    },
+    {
+      "testcase_id": "TC-002",
+      "testcase_type": "edge_case",
+      "test_intent": "insufficient_balance_validation",
+      "target_operation": "SafeWithdrawal",
+      "risk_pattern": "rollback_failure",
+      "behavioral_focus": [
+        "transaction_consistency_test",
+        "rollback_validation"
+      ],
+      "setup_sql": [
+        {
+          "sql": "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (101, 'John Doe', 'Individual')",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (201, 'Main Branch', 'City Center')",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (301, 201, 101, 'SAVINGS', 500)",
+          "expected_result": {}
+        }
+      ],
+      "execution_sql": [
+        {
+          "sql": "BEGIN SafeWithdrawal(301, -100); END;",
+          "expected_result": {}
+        }
+      ],
+      "assertion_sql": [
+        {
+          "sql": "SELECT ac_no, bal FROM ACCOUNTS WHERE ac_no = 301",
+          "expected_result": {
+            "columns": [
+              "ac_no",
+              "bal"
+            ],
+            "rows": [
+              [
+                301,
+                500
+              ]
+            ]
+          }
+        }
+      ],
+      "expected_result": {}
+    },
+    {
+      "testcase_id": "TC-003",
+      "testcase_type": "edge_case",
+      "test_intent": "rollback_consistency_validation",
+      "target_operation": "SafeWithdrawal",
+      "risk_pattern": "rollback_failure",
+      "behavioral_focus": [
+        "transaction_consistency_test",
+        "rollback_validation"
+      ],
+      "setup_sql": [],
+      "execution_sql": [],
+      "assertion_sql": [],
+      "expected_result": {}
+    },
+    {
+      "testcase_id": "TC-004",
+      "testcase_type": "edge_case",
+      "test_intent": "threshold_equal_validation",
+      "target_operation": "UpdateCustomerClass",
+      "risk_pattern": "threshold_logic_failure",
+      "behavioral_focus": [
+        "boundary_test",
+        "equality_test",
+        "off_by_one_test"
+      ],
+      "setup_sql": [
+        {
+          "sql": "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (1, 'Test Customer', NULL)",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (1, 101, 1, 'SAVINGS', 500)",
+          "expected_result": {}
+        }
+      ],
+      "execution_sql": [
+        {
+          "sql": "EXEC UpdateCustomerClass(:threshold_value, :cust_no)",
+          "expected_result": {}
+        }
+      ],
+      "assertion_sql": [
+        {
+          "sql": "SELECT c_type FROM CUSTOMER WHERE cno = :cust_no",
+          "expected_result": {
+            "c_type": "VIP"
+          }
+        }
+      ],
+      "expected_result": {}
+    },
+    {
+      "testcase_id": "TC-005",
+      "testcase_type": "edge_case",
+      "test_intent": "threshold_minus_one_validation",
+      "target_operation": "UpdateCustomerClass",
+      "risk_pattern": "threshold_logic_failure",
+      "behavioral_focus": [
+        "boundary_test",
+        "equality_test",
+        "off_by_one_test"
+      ],
+      "setup_sql": [
+        {
+          "sql": "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (1, 'John Doe', NULL)",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (101, 'Branch A', 'New York')",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (201, 101, 1, 'SAVINGS', 500)",
+          "expected_result": {}
+        }
+      ],
+      "execution_sql": [
+        {
+          "sql": "EXECUTE UPDATECUSTOMERCLASS(:threshold_value, :cust_no)",
+          "expected_result": {}
+        }
+      ],
+      "assertion_sql": [
+        {
+          "sql": "SELECT c_type FROM CUSTOMER WHERE cno = 1",
+          "expected_result": {
+            "columns": [
+              "c_type"
+            ],
+            "rows": [
+              [
+                "SILVER"
+              ]
+            ]
+          }
+        }
+      ],
+      "expected_result": {}
+    },
+    {
+      "testcase_id": "TC-006",
+      "testcase_type": "edge_case",
+      "test_intent": "threshold_plus_one_validation",
+      "target_operation": "UpdateCustomerClass",
+      "risk_pattern": "threshold_logic_failure",
+      "behavioral_focus": [
+        "boundary_test",
+        "equality_test",
+        "off_by_one_test"
+      ],
+      "setup_sql": [
+        {
+          "sql": "INSERT INTO CUSTOMER (cno, cname) VALUES (101, 'John Doe')",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (201, 1, 101, 'SAVINGS', 500)",
+          "expected_result": {}
+        },
+        {
+          "sql": "UPDATE CUSTOMER SET c_type = 'VIP' WHERE cno = 101",
+          "expected_result": {}
+        }
+      ],
+      "execution_sql": [
+        {
+          "sql": "BEGIN DBMS_OUTPUT.PUT_LINE(UpdateCustomerClass(500, 101)); END;",
+          "expected_result": {}
+        }
+      ],
+      "assertion_sql": [
+        {
+          "sql": "SELECT c_type FROM CUSTOMER WHERE cno = 101",
+          "expected_result": {
+            "columns": [
+              "c_type"
+            ],
+            "rows": [
+              [
+                "VIP"
+              ]
+            ]
+          }
+        }
+      ],
+      "expected_result": {}
+    },
+    {
+      "testcase_id": "TC-007",
+      "testcase_type": "edge_case",
+      "test_intent": "dependency_transfer_validation",
+      "target_operation": "CloseBranch",
+      "risk_pattern": "referential_integrity_failure",
+      "behavioral_focus": [
+        "cross_table_consistency_test"
+      ],
+      "setup_sql": [],
+      "execution_sql": [],
+      "assertion_sql": [],
+      "expected_result": {}
+    },
+    {
+      "testcase_id": "TC-008",
+      "testcase_type": "normal_case",
+      "test_intent": "successful_execution",
+      "target_operation": "UpdateCustomerClass",
+      "risk_pattern": null,
+      "behavioral_focus": [],
+      "setup_sql": [
+        {
+          "sql": "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (:1, :2, :3)",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (:1, :2, :3, :4, :5)",
+          "expected_result": {}
+        }
+      ],
+      "execution_sql": [
+        {
+          "sql": "BEGIN UPDATECUSTOMERCLASS(:1, :2); END;",
+          "expected_result": {}
+        }
+      ],
+      "assertion_sql": [
+        {
+          "sql": "SELECT c_type FROM CUSTOMER WHERE cno = :1",
+          "expected_result": {
+            "columns": [
+              "c_type"
+            ]
+          }
+        }
+      ],
+      "expected_result": {
+        "c_type": "vip"
+      }
+    },
+    {
+      "testcase_id": "TC-009",
+      "testcase_type": "normal_case",
+      "test_intent": "successful_execution",
+      "target_operation": "CloseBranch",
+      "risk_pattern": null,
+      "behavioral_focus": [],
+      "setup_sql": [
+        {
+          "sql": "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (:1, 'Test Branch', 'Test Location')",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (:1, 'Customer Test', NULL)",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (:1, :2, :3, 'SAVINGS', 500)",
+          "expected_result": {}
+        }
+      ],
+      "execution_sql": [
+        {
+          "sql": "BEGIN CLOSEBRANCH(:closing_branch_no, :new_branch_no); END;",
+          "expected_result": {}
+        }
+      ],
+      "assertion_sql": [
+        {
+          "sql": "SELECT COUNT(*) FROM BRANCHES WHERE br_no = :closing_branch_no",
+          "expected_result": {
+            "0": 0
+          }
+        },
+        {
+          "sql": "SELECT COUNT(*) FROM BRANCHES WHERE br_no = :new_branch_no",
+          "expected_result": {
+            "0": 2
+          }
+        }
+      ],
+      "expected_result": {}
+    },
+    {
+      "testcase_id": "TC-010",
+      "testcase_type": "normal_case",
+      "test_intent": "successful_execution",
+      "target_operation": "SafeWithdrawal",
+      "risk_pattern": null,
+      "behavioral_focus": [],
+      "setup_sql": [
+        {
+          "sql": "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (101, 10, 101, 'SAVINGS', 1000)",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (10, 'Main Branch', 'New York')",
+          "expected_result": {}
+        },
+        {
+          "sql": "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (101, 'John Doe', NULL)",
+          "expected_result": {}
+        }
+      ],
+      "execution_sql": [
+        {
+          "sql": "BEGIN SafeWithdrawal(101, 500); END;",
+          "expected_result": {}
+        }
+      ],
+      "assertion_sql": [
+        {
+          "sql": "SELECT bal FROM ACCOUNTS WHERE ac_no = 101",
+          "expected_result": {
+            "columns": [
+              "bal"
+            ],
+            "rows": [
+              [
+                500
+              ]
+            ]
+          }
+        }
+      ],
+      "expected_result": {}
+    }
+  ]
+}

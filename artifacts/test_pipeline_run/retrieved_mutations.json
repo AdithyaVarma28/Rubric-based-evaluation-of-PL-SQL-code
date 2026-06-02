@@ -1,0 +1,105 @@
+[
+  {
+    "score": 58.55873978956521,
+    "reasons": [
+      "matched risk tags: transaction",
+      "category aligned with inferred risk: transaction",
+      "matched assignment keywords: 2",
+      "shares prompt vocabulary with the assignment"
+    ],
+    "document": {
+      "id": "MUT-N002",
+      "category": "transaction",
+      "mutation_name": "Close Branch Orphan Accounts",
+      "plsql_construct": "multi-step branch transfer",
+      "mutation_rule": "Reverse the safe transfer order so the branch is deleted before dependent accounts move.",
+      "why_it_matters": "Checks whether tests catch referential-integrity and ordering faults in transactional routines.",
+      "expected_observable_effect": "Foreign-key failure, orphaned accounts, or partial transfer state.",
+      "original_snippet": "UPDATE accounts SET br_no = p_new_branch WHERE br_no = p_old_branch; DELETE FROM branches WHERE br_no = p_old_branch;",
+      "mutant_snippet": "DELETE FROM branches WHERE br_no = p_old_branch; UPDATE accounts SET br_no = p_new_branch WHERE br_no = p_old_branch;",
+      "tags": [
+        "plsql",
+        "transaction",
+        "foreign_key",
+        "branch",
+        "ordering"
+      ],
+      "content": "Close Branch Orphan Accounts targets branch-closure routines. It deletes the source branch before transferring dependent accounts, which should trigger referential-integrity failures or leave the database in a partial state. This is useful for evaluating transaction-aware PL/SQL test suites.",
+      "source": "novel"
+    }
+  },
+  {
+    "score": 46.08499375509863,
+    "reasons": [
+      "matched assignment keywords: 1",
+      "shares prompt vocabulary with the assignment"
+    ],
+    "document": {
+      "id": "MUT-037",
+      "category": "sql",
+      "mutation_name": "Column Reference Mutation",
+      "plsql_construct": "SELECT column",
+      "mutation_rule": "Swap a referenced column with another compatible column.",
+      "why_it_matters": "Finds mapping mistakes between schema fields.",
+      "expected_observable_effect": "Returned value differs.",
+      "original_snippet": "SELECT account_id FROM accounts;",
+      "mutant_snippet": "SELECT customer_id FROM accounts;",
+      "tags": [
+        "plsql",
+        "sql",
+        "column",
+        "mapping"
+      ],
+      "content": "Column Reference Mutation. In PL/SQL, this mutation targets SELECT column. Original example: SELECT account_id FROM accounts; Mutant example: SELECT customer_id FROM accounts; Mutation rule: Swap a referenced column with another compatible column. Why it matters: Finds mapping mistakes between schema fields. Expected observable effect: Returned value differs.",
+      "source": "seed"
+    }
+  },
+  {
+    "score": 36.66465611656235,
+    "reasons": [],
+    "document": {
+      "id": "MUT-003",
+      "category": "declaration",
+      "mutation_name": "Anchor-Type Narrowing",
+      "plsql_construct": "%TYPE declaration",
+      "mutation_rule": "Narrow the declared precision or length.",
+      "why_it_matters": "Reveals hidden dependence on wide numeric ranges.",
+      "expected_observable_effect": "Overflow, rounding, or validation failure.",
+      "original_snippet": "v_amt NUMBER(10,2);",
+      "mutant_snippet": "v_amt NUMBER(5,2);",
+      "tags": [
+        "plsql",
+        "declaration",
+        "datatype",
+        "precision"
+      ],
+      "content": "Anchor-Type Narrowing. In PL/SQL, this mutation targets %TYPE declaration. Original example: v_amt NUMBER(10,2); Mutant example: v_amt NUMBER(5,2); Mutation rule: Narrow the declared precision or length. Why it matters: Reveals hidden dependence on wide numeric ranges. Expected observable effect: Overflow, rounding, or validation failure.",
+      "source": "seed"
+    }
+  },
+  {
+    "score": 36.637186992208854,
+    "reasons": [
+      "matched assignment keywords: 1"
+    ],
+    "document": {
+      "id": "MUT-007",
+      "category": "parameter",
+      "mutation_name": "Default Parameter Change",
+      "plsql_construct": "formal parameter default",
+      "mutation_rule": "Change the default value used when callers omit the argument.",
+      "why_it_matters": "Checks whether tests cover default-path behavior.",
+      "expected_observable_effect": "Different branch or workflow is selected.",
+      "original_snippet": "PROCEDURE p(p_mode IN VARCHAR2 DEFAULT 'A')",
+      "mutant_snippet": "PROCEDURE p(p_mode IN VARCHAR2 DEFAULT 'B')",
+      "tags": [
+        "plsql",
+        "parameter",
+        "default",
+        "interface"
+      ],
+      "content": "Default Parameter Change. In PL/SQL, this mutation targets formal parameter default. Original example: PROCEDURE p(p_mode IN VARCHAR2 DEFAULT 'A') Mutant example: PROCEDURE p(p_mode IN VARCHAR2 DEFAULT 'B') Mutation rule: Change the default value used when callers omit the argument. Why it matters: Checks whether tests cover default-path behavior. Expected observable effect: Different branch or workflow is selected.",
+      "source": "seed"
+    }
+  }
+]

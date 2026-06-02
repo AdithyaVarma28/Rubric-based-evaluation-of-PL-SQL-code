@@ -1,0 +1,18 @@
+{
+  "intent_proxy_coverage": 1.0,
+  "intent_hits": {
+    "threshold_classification": true,
+    "safe_withdrawal": true,
+    "branch_transfer": true
+  },
+  "retrieved_categories": {
+    "transaction": 1,
+    "exception": 2,
+    "business_rule": 1,
+    "parameter": 1,
+    "relational": 1,
+    "control_flow": 2
+  },
+  "retrieved_count": 8,
+  "diverse_category_count": 6
+}

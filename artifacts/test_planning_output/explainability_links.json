@@ -1,0 +1,82 @@
+[
+  {
+    "test_intent": "exact_balance_validation",
+    "target_operations": [
+      "SafeWithdrawal"
+    ],
+    "risk_pattern": "rollback_failure",
+    "feedback_strategy": "behavioral_failure_analysis"
+  },
+  {
+    "test_intent": "insufficient_balance_validation",
+    "target_operations": [
+      "SafeWithdrawal"
+    ],
+    "risk_pattern": "rollback_failure",
+    "feedback_strategy": "behavioral_failure_analysis"
+  },
+  {
+    "test_intent": "rollback_consistency_validation",
+    "target_operations": [
+      "SafeWithdrawal"
+    ],
+    "risk_pattern": "rollback_failure",
+    "feedback_strategy": "behavioral_failure_analysis"
+  },
+  {
+    "test_intent": "threshold_equal_validation",
+    "target_operations": [
+      "UpdateCustomerClass"
+    ],
+    "risk_pattern": "threshold_logic_failure",
+    "feedback_strategy": "behavioral_failure_analysis"
+  },
+  {
+    "test_intent": "threshold_minus_one_validation",
+    "target_operations": [
+      "UpdateCustomerClass"
+    ],
+    "risk_pattern": "threshold_logic_failure",
+    "feedback_strategy": "behavioral_failure_analysis"
+  },
+  {
+    "test_intent": "threshold_plus_one_validation",
+    "target_operations": [
+      "UpdateCustomerClass"
+    ],
+    "risk_pattern": "threshold_logic_failure",
+    "feedback_strategy": "behavioral_failure_analysis"
+  },
+  {
+    "test_intent": "dependency_transfer_validation",
+    "target_operations": [
+      "CloseBranch"
+    ],
+    "risk_pattern": "referential_integrity_failure",
+    "feedback_strategy": "behavioral_failure_analysis"
+  },
+  {
+    "test_intent": "successful_execution",
+    "target_operations": [
+      "UpdateCustomerClass"
+    ],
+    "risk_pattern": null,
+    "feedback_strategy": "behavioral_failure_analysis"
+  },
+  {
+    "test_intent": "successful_execution",
+    "target_operations": [
+      "CloseBranch"
+    ],
+    "risk_pattern": null,
+    "feedback_strategy": "behavioral_failure_analysis"
+  },
+  {
+    "test_intent": "successful_execution",
+    "target_operations": [
+      "SafeWithdrawal"
+    ],
+    "risk_pattern": null,
+    "feedback_strategy": "behavioral_failure_analysis"
+  }
+]

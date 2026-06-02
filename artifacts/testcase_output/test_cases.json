@@ -1,0 +1,161 @@
+[
+  {
+    "id": "normal_customer",
+    "category": "normal",
+    "title": "Normal data load for CUSTOMER",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (111, 'cname_1', 'A');",
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (121, 'cname_2', 'A');"
+    ],
+    "assertions": [
+      "Ensure CUSTOMER loads successfully."
+    ]
+  },
+  {
+    "id": "normal_branches",
+    "category": "normal",
+    "title": "Normal data load for BRANCHES",
+    "setup_sql": [
+      "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (211, 'br_name_1', 'Location_1');",
+      "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (221, 'br_name_2', 'Location_2');"
+    ],
+    "assertions": [
+      "Ensure BRANCHES loads successfully."
+    ]
+  },
+  {
+    "id": "normal_accounts",
+    "category": "normal",
+    "title": "Normal data load for ACCOUNTS",
+    "setup_sql": [
+      "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (311, 211, 111, 'A', 1150.0);",
+      "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (321, 221, 121, 'A', 1300.0);"
+    ],
+    "assertions": [
+      "Ensure ACCOUNTS loads successfully."
+    ]
+  },
+  {
+    "id": "boundary_customer",
+    "category": "boundary",
+    "title": "Boundary check for CUSTOMER",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (0, 'cname_1', 'A');"
+    ],
+    "assertions": [
+      "Validate boundary behavior for CUSTOMER."
+    ]
+  },
+  {
+    "id": "negative_customer",
+    "category": "negative",
+    "title": "Negative input for CUSTOMER",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (NULL, 'cname_1', 'A');"
+    ],
+    "assertions": [
+      "Expect controlled rejection or validation for CUSTOMER."
+    ]
+  },
+  {
+    "id": "boundary_branches",
+    "category": "boundary",
+    "title": "Boundary check for BRANCHES",
+    "setup_sql": [
+      "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (0, 'br_name_1', 'Location_1');"
+    ],
+    "assertions": [
+      "Validate boundary behavior for BRANCHES."
+    ]
+  },
+  {
+    "id": "negative_branches",
+    "category": "negative",
+    "title": "Negative input for BRANCHES",
+    "setup_sql": [
+      "INSERT INTO BRANCHES (br_no, br_name, loc) VALUES (NULL, 'br_name_1', 'Location_1');"
+    ],
+    "assertions": [
+      "Expect controlled rejection or validation for BRANCHES."
+    ]
+  },
+  {
+    "id": "boundary_accounts",
+    "category": "boundary",
+    "title": "Boundary check for ACCOUNTS",
+    "setup_sql": [
+      "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (0, 211, 111, 'A', 1150.0);"
+    ],
+    "assertions": [
+      "Validate boundary behavior for ACCOUNTS."
+    ]
+  },
+  {
+    "id": "negative_accounts",
+    "category": "negative",
+    "title": "Negative input for ACCOUNTS",
+    "setup_sql": [
+      "INSERT INTO ACCOUNTS (ac_no, br_no, cust_no, ac_type, bal) VALUES (NULL, 211, 111, 'A', 1150.0);"
+    ],
+    "assertions": [
+      "Expect controlled rejection or validation for ACCOUNTS."
+    ]
+  },
+  {
+    "id": "mutation_01",
+    "category": "mutation",
+    "title": "COMMIT Removal",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (111, 'cname_1', 'A');"
+    ],
+    "assertions": [
+      "Changes are not persisted after execution."
+    ],
+    "mutation_id": "MUT-043"
+  },
+  {
+    "id": "mutation_02",
+    "category": "mutation",
+    "title": "SQLCODE Branch Mutation",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (111, 'cname_1', 'A');"
+    ],
+    "assertions": [
+      "Wrong handler branch executes."
+    ],
+    "mutation_id": "MUT-051"
+  },
+  {
+    "id": "mutation_03",
+    "category": "mutation",
+    "title": "Threshold Tightening",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (111, 'cname_1', 'B');"
+    ],
+    "assertions": [
+      "Boundary value is rejected."
+    ],
+    "mutation_id": "MUT-074"
+  },
+  {
+    "id": "mutation_04",
+    "category": "mutation",
+    "title": "Raise Removed",
+    "setup_sql": [
+      "INSERT INTO CUSTOMER (cno, cname, c_type) VALUES (111, 'cname_1', 'A');"
+    ],
+    "assertions": [
+      "Input is accepted when it should fail."
+    ],
+    "mutation_id": "MUT-050"
+  },
+  {
+    "id": "exception_insufficient_funds",
+    "category": "exception",
+    "title": "Insufficient funds rejection",
+    "setup_sql": [],
+    "assertions": [
+      "Withdrawal should fail safely when the requested amount exceeds the balance."
+    ]
+  }
+]

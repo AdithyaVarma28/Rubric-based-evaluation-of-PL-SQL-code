@@ -1,0 +1,195 @@
+{
+  "title": "Bank Database Schema",
+  "entities": [
+    {
+      "name": "ACCOUNTS",
+      "attributes": [
+        {
+          "name": "ac_no",
+          "type": "NUMBER",
+          "nullable": false
+        },
+        {
+          "name": "br_no",
+          "type": "NUMBER",
+          "nullable": false
+        },
+        {
+          "name": "cust_no",
+          "type": "NUMBER",
+          "nullable": false
+        },
+        {
+          "name": "ac_type",
+          "type": "VARCHAR2(10)",
+          "nullable": false
+        },
+        {
+          "name": "bal",
+          "type": "NUMBER",
+          "nullable": false
+        }
+      ],
+      "primary_key": [
+        "ac_no"
+      ]
+    },
+    {
+      "name": "BRANCHES",
+      "attributes": [
+        {
+          "name": "br_no",
+          "type": "NUMBER",
+          "nullable": false
+        },
+        {
+          "name": "br_name",
+          "type": "VARCHAR2(50)",
+          "nullable": false
+        },
+        {
+          "name": "loc",
+          "type": "VARCHAR2(50)",
+          "nullable": false
+        }
+      ],
+      "primary_key": [
+        "br_no"
+      ]
+    },
+    {
+      "name": "CUSTOMER",
+      "attributes": [
+        {
+          "name": "cno",
+          "type": "NUMBER",
+          "nullable": false
+        },
+        {
+          "name": "cname",
+          "type": "VARCHAR2(100)",
+          "nullable": false
+        },
+        {
+          "name": "c_type",
+          "type": "VARCHAR2(10)",
+          "nullable": true
+        }
+      ],
+      "primary_key": [
+        "cno"
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "from_entity": "ACCOUNTS",
+      "to_entity": "BRANCHES",
+      "type": "many_to_one"
+    },
+    {
+      "from_entity": "ACCOUNTS",
+      "to_entity": "CUSTOMER",
+      "type": "many_to_one"
+    }
+  ],
+  "constraints": [],
+  "procedural_intents": [
+    {
+      "name": "boundary_validation",
+      "risk_tags": [
+        "threshold_logic_failure"
+      ],
+      "behavioral_expectations": [
+        "Boundary equality cases must be tested.",
+        "Cross-table updates should preserve consistency.",
+        "Exact balance withdrawals should succeed.",
+        "Negative withdrawal amounts should fail.",
+        "Operation should reject insufficient balance.",
+        "Partial failures should rollback safely.",
+        "Threshold minus one cases should behave correctly.",
+        "Threshold plus one cases should behave correctly."
+      ]
+    },
+    {
+      "name": "closebranch",
+      "risk_tags": [
+        "threshold_logic_failure"
+      ],
+      "behavioral_expectations": [
+        "Boundary equality cases must be tested.",
+        "Cross-table updates should preserve consistency.",
+        "Exact balance withdrawals should succeed.",
+        "Negative withdrawal amounts should fail.",
+        "Operation should reject insufficient balance.",
+        "Partial failures should rollback safely.",
+        "Threshold minus one cases should behave correctly.",
+        "Threshold plus one cases should behave correctly."
+      ]
+    },
+    {
+      "name": "cross_table_dependency",
+      "risk_tags": [
+        "threshold_logic_failure"
+      ],
+      "behavioral_expectations": [
+        "Boundary equality cases must be tested.",
+        "Cross-table updates should preserve consistency.",
+        "Exact balance withdrawals should succeed.",
+        "Negative withdrawal amounts should fail.",
+        "Operation should reject insufficient balance.",
+        "Partial failures should rollback safely.",
+        "Threshold minus one cases should behave correctly.",
+        "Threshold plus one cases should behave correctly."
+      ]
+    },
+    {
+      "name": "safewithdrawal",
+      "risk_tags": [
+        "threshold_logic_failure"
+      ],
+      "behavioral_expectations": [
+        "Boundary equality cases must be tested.",
+        "Cross-table updates should preserve consistency.",
+        "Exact balance withdrawals should succeed.",
+        "Negative withdrawal amounts should fail.",
+        "Operation should reject insufficient balance.",
+        "Partial failures should rollback safely.",
+        "Threshold minus one cases should behave correctly.",
+        "Threshold plus one cases should behave correctly."
+      ]
+    },
+    {
+      "name": "transaction_sensitive_operation",
+      "risk_tags": [
+        "threshold_logic_failure"
+      ],
+      "behavioral_expectations": [
+        "Boundary equality cases must be tested.",
+        "Cross-table updates should preserve consistency.",
+        "Exact balance withdrawals should succeed.",
+        "Negative withdrawal amounts should fail.",
+        "Operation should reject insufficient balance.",
+        "Partial failures should rollback safely.",
+        "Threshold minus one cases should behave correctly.",
+        "Threshold plus one cases should behave correctly."
+      ]
+    },
+    {
+      "name": "updatecustomertype",
+      "risk_tags": [
+        "threshold_logic_failure"
+      ],
+      "behavioral_expectations": [
+        "Boundary equality cases must be tested.",
+        "Cross-table updates should preserve consistency.",
+        "Exact balance withdrawals should succeed.",
+        "Negative withdrawal amounts should fail.",
+        "Operation should reject insufficient balance.",
+        "Partial failures should rollback safely.",
+        "Threshold minus one cases should behave correctly.",
+        "Threshold plus one cases should behave correctly."
+      ]
+    }
+  ]
+}

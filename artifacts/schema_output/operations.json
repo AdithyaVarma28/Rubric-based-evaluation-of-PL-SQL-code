@@ -1,0 +1,63 @@
+[
+  {
+    "operation_name": "UpdateCustomerClass",
+    "operation_type": "function",
+    "semantic_categories": [
+      "classification_logic"
+    ],
+    "parameters": [
+      {
+        "name": "threshold_value",
+        "type": "NUMBER"
+      },
+      {
+        "name": "cust_no",
+        "type": "NUMBER"
+      }
+    ],
+    "expected_effects": [
+      "Updates the c_type of a customer based on their account balance relative to a threshold value."
+    ]
+  },
+  {
+    "operation_name": "CloseBranch",
+    "operation_type": "function",
+    "semantic_categories": [
+      "transaction_sensitive_operation",
+      "cross_table_dependency"
+    ],
+    "parameters": [
+      {
+        "name": "closing_branch_no",
+        "type": "NUMBER"
+      },
+      {
+        "name": "new_branch_no",
+        "type": "NUMBER"
+      }
+    ],
+    "expected_effects": [
+      "Transfers all accounts from the closing branch to a new branch, and removes the closing branch."
+    ]
+  },
+  {
+    "operation_name": "SafeWithdrawal",
+    "operation_type": "function",
+    "semantic_categories": [
+      "transaction_sensitive_operation"
+    ],
+    "parameters": [
+      {
+        "name": "ac_no",
+        "type": "NUMBER"
+      },
+      {
+        "name": "withdraw_amount",
+        "type": "NUMBER"
+      }
+    ],
+    "expected_effects": [
+      "Performs a safe withdrawal operation, checking for sufficient funds before processing the transaction."
+    ]
+  }
+]

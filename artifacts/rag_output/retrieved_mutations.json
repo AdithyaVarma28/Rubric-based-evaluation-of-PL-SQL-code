@@ -1,0 +1,165 @@
+[
+  {
+    "id": "MUT-044",
+    "mutation_name": "ROLLBACK Removal",
+    "semantic_category": "transaction_sensitive_operation",
+    "procedural_risk": "rollback_failure",
+    "testcase_strategy": [
+      "transaction_consistency_test",
+      "rollback_validation"
+    ],
+    "edge_case_family": [
+      "partial_failure",
+      "rollback_case"
+    ],
+    "score": 3.2682,
+    "why_it_matters": "Exposes missing cleanup or recovery checks."
+  },
+  {
+    "id": "MUT-045",
+    "mutation_name": "Savepoint Mutation",
+    "semantic_category": "transaction_sensitive_operation",
+    "procedural_risk": "rollback_failure",
+    "testcase_strategy": [
+      "transaction_consistency_test",
+      "rollback_validation"
+    ],
+    "edge_case_family": [
+      "partial_failure",
+      "rollback_case"
+    ],
+    "score": 3.2529,
+    "why_it_matters": "Useful in multi-step business transactions."
+  },
+  {
+    "id": "MUT-082",
+    "mutation_name": "Rollback Removal",
+    "semantic_category": "transaction_sensitive_operation",
+    "procedural_risk": "rollback_failure",
+    "testcase_strategy": [
+      "transaction_consistency_test",
+      "rollback_validation"
+    ],
+    "edge_case_family": [
+      "partial_failure",
+      "rollback_case"
+    ],
+    "score": 3.2529,
+    "why_it_matters": "Paper includes this as a PL/SQL-specific operator."
+  },
+  {
+    "id": "MUT-074",
+    "mutation_name": "Threshold Tightening",
+    "semantic_category": "boundary_validation",
+    "procedural_risk": "threshold_logic_failure",
+    "testcase_strategy": [
+      "boundary_test",
+      "equality_test",
+      "off_by_one_test"
+    ],
+    "edge_case_family": [
+      "threshold_equal",
+      "threshold_minus_one",
+      "threshold_plus_one"
+    ],
+    "score": 3.1965,
+    "why_it_matters": "Boundary case is excluded."
+  },
+  {
+    "id": "MUT-073",
+    "mutation_name": "Threshold Relaxation",
+    "semantic_category": "boundary_validation",
+    "procedural_risk": "threshold_logic_failure",
+    "testcase_strategy": [
+      "boundary_test",
+      "equality_test",
+      "off_by_one_test"
+    ],
+    "edge_case_family": [
+      "threshold_equal",
+      "threshold_minus_one",
+      "threshold_plus_one"
+    ],
+    "score": 3.1924,
+    "why_it_matters": "Classic boundary mutation for rule engines."
+  },
+  {
+    "id": "MUT-009",
+    "mutation_name": "Call-Site Boundary Value",
+    "semantic_category": "boundary_validation",
+    "procedural_risk": "threshold_logic_failure",
+    "testcase_strategy": [
+      "boundary_test",
+      "equality_test",
+      "off_by_one_test"
+    ],
+    "edge_case_family": [
+      "threshold_equal",
+      "threshold_minus_one",
+      "threshold_plus_one"
+    ],
+    "score": 3.1469,
+    "why_it_matters": "Boundary tests are one of the highest-value checks in PL/SQL business logic."
+  },
+  {
+    "id": "MUT-020",
+    "mutation_name": "IF Branch Removal",
+    "semantic_category": "cross_table_dependency",
+    "procedural_risk": "referential_integrity_failure",
+    "testcase_strategy": [
+      "cross_table_consistency_test"
+    ],
+    "edge_case_family": [
+      "orphan_reference",
+      "dependency_break"
+    ],
+    "score": 3.0456,
+    "why_it_matters": "Checks whether a branch is truly exercised by tests."
+  },
+  {
+    "id": "MUT-017",
+    "mutation_name": "Insert NOT",
+    "semantic_category": "cross_table_dependency",
+    "procedural_risk": "referential_integrity_failure",
+    "testcase_strategy": [
+      "cross_table_consistency_test"
+    ],
+    "edge_case_family": [
+      "orphan_reference",
+      "dependency_break"
+    ],
+    "score": 3.0359,
+    "why_it_matters": "Detects whether both truth values are tested."
+  },
+  {
+    "id": "MUT-021",
+    "mutation_name": "Branch Condition Inversion",
+    "semantic_category": "cross_table_dependency",
+    "procedural_risk": "referential_integrity_failure",
+    "testcase_strategy": [
+      "cross_table_consistency_test"
+    ],
+    "edge_case_family": [
+      "orphan_reference",
+      "dependency_break"
+    ],
+    "score": 3.0173,
+    "why_it_matters": "Detects weak branch-specific assertions."
+  },
+  {
+    "id": "MUT-050",
+    "mutation_name": "Raise Removed",
+    "semantic_category": "exception_sensitive_operation",
+    "procedural_risk": "exception_swallowing",
+    "testcase_strategy": [
+      "exception_trigger_test",
+      "error_propagation_test"
+    ],
+    "edge_case_family": [
+      "invalid_input",
+      "runtime_exception"
+    ],
+    "score": 2.6322,
+    "why_it_matters": "Finds tests that do not verify failure paths."
+  }
+]

@@ -1,0 +1,207 @@
+{
+  "title": "Bank Evaluation Schema",
+  "entities": [
+    {
+      "name": "CUSTOMER",
+      "attributes": [
+        {
+          "name": "cno",
+          "type_hint": "NUMBER",
+          "nullable": false,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "cname",
+          "type_hint": "VARCHAR2(100)",
+          "nullable": false,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "c_type",
+          "type_hint": "VARCHAR2(10)",
+          "nullable": false,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "cno"
+      ],
+      "description": ""
+    },
+    {
+      "name": "BRANCHES",
+      "attributes": [
+        {
+          "name": "br_no",
+          "type_hint": "NUMBER",
+          "nullable": false,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "br_name",
+          "type_hint": "VARCHAR2(100)",
+          "nullable": false,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "loc",
+          "type_hint": "VARCHAR2(80)",
+          "nullable": false,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "br_no"
+      ],
+      "description": ""
+    },
+    {
+      "name": "ACCOUNTS",
+      "attributes": [
+        {
+          "name": "ac_no",
+          "type_hint": "NUMBER",
+          "nullable": false,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "br_no",
+          "type_hint": "NUMBER",
+          "nullable": false,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "cust_no",
+          "type_hint": "NUMBER",
+          "nullable": false,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "ac_type",
+          "type_hint": "VARCHAR2(30)",
+          "nullable": false,
+          "unique": false,
+          "default": null,
+          "description": ""
+        },
+        {
+          "name": "bal",
+          "type_hint": "NUMBER(10,2)",
+          "nullable": false,
+          "unique": false,
+          "default": null,
+          "description": ""
+        }
+      ],
+      "primary_key": [
+        "ac_no"
+      ],
+      "description": ""
+    }
+  ],
+  "relationships": [
+    {
+      "from_entity": "ACCOUNTS",
+      "to_entity": "BRANCHES",
+      "type": "one-to-many",
+      "from_columns": [
+        "br_no"
+      ],
+      "to_columns": [
+        "br_no"
+      ],
+      "via": null,
+      "description": ""
+    },
+    {
+      "from_entity": "ACCOUNTS",
+      "to_entity": "CUSTOMER",
+      "type": "one-to-many",
+      "from_columns": [
+        "cust_no"
+      ],
+      "to_columns": [
+        "cno"
+      ],
+      "via": null,
+      "description": ""
+    }
+  ],
+  "constraints": [
+    {
+      "name": "chk_positive_balance",
+      "type": "check",
+      "entity": "ACCOUNTS",
+      "columns": [
+        "bal"
+      ],
+      "expression": "bal >= 0",
+      "description": ""
+    }
+  ],
+  "assumptions": [],
+  "procedural_intents": [
+    {
+      "name": "safe_withdrawal",
+      "goal": "Prevent invalid withdrawals.",
+      "inputs": [
+        "account number",
+        "amount"
+      ],
+      "outputs": [
+        "updated balance"
+      ],
+      "expected_behavior": "Reject insufficient funds.",
+      "risk_tags": [
+        "transaction",
+        "boundary",
+        "exception"
+      ]
+    }
+  ],
+  "rubric_dimensions": [
+    {
+      "name": "normal_cases",
+      "weight": 25.0,
+      "description": "happy path"
+    },
+    {
+      "name": "boundary_cases",
+      "weight": 20.0,
+      "description": "edges"
+    },
+    {
+      "name": "mutation_cases",
+      "weight": 20.0,
+      "description": "fault exposure"
+    },
+    {
+      "name": "exception_handling",
+      "weight": 15.0,
+      "description": "exceptions"
+    },
+    {
+      "name": "procedural_logic",
+      "weight": 20.0,
+      "description": "logic"
+    }
+  ]
+}

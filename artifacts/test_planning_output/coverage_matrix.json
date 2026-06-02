@@ -1,0 +1,12 @@
+{
+  "operation_coverage": {
+    "SafeWithdrawal": 4,
+    "UpdateCustomerClass": 4,
+    "CloseBranch": 2
+  },
+  "testcase_distribution": {
+    "edge_case": 7,
+    "normal_case": 3
+  },
+  "total_testcases": 10
+}

@@ -1,0 +1,49 @@
+{
+  "entity_hints": [
+    {
+      "name": "ACCOUNTS",
+      "columns": [
+        "ac_no",
+        "br_no",
+        "cust_no",
+        "ac_type",
+        "bal"
+      ]
+    },
+    {
+      "name": "BRANCHES",
+      "columns": [
+        "br_no",
+        "br_name",
+        "loc"
+      ]
+    },
+    {
+      "name": "CUSTOMER",
+      "columns": [
+        "cno",
+        "cname",
+        "c_type"
+      ]
+    }
+  ],
+  "procedural_patterns": [
+    "boundary_validation",
+    "cross_table_dependency",
+    "transaction_sensitive_operation"
+  ],
+  "risk_patterns": [
+    "threshold_logic_failure"
+  ],
+  "behavioral_expectations": [
+    "Boundary equality cases must be tested.",
+    "Cross-table updates should preserve consistency.",
+    "Exact balance withdrawals should succeed.",
+    "Negative withdrawal amounts should fail.",
+    "Operation should reject insufficient balance.",
+    "Partial failures should rollback safely.",
+    "Threshold minus one cases should behave correctly.",
+    "Threshold plus one cases should behave correctly."
+  ],
+  "prompt_token_count": 108
+}

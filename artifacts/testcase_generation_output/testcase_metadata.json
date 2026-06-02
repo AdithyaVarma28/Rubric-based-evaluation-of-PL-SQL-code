@@ -1,0 +1,15 @@
+{
+  "total_testcases": 10,
+  "operation_distribution": {
+    "SafeWithdrawal": 4,
+    "UpdateCustomerClass": 4,
+    "CloseBranch": 2
+  },
+  "testcase_types": {
+    "edge_case": 7,
+    "normal_case": 3
+  },
+  "total_setup_sql": 22,
+  "total_execution_sql": 8,
+  "total_assertions": 9
+}

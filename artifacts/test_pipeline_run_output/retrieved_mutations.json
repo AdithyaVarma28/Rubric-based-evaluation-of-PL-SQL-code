@@ -1,0 +1,112 @@
+[
+  {
+    "score": 40.11229074624804,
+    "reasons": [
+      "matched risk tags: boundary, exception",
+      "category aligned with inferred risk: exception",
+      "matched assignment keywords: 2",
+      "shares prompt vocabulary with the assignment"
+    ],
+    "document": {
+      "id": "MUT-N003",
+      "category": "exception",
+      "mutation_name": "Safe Withdrawal Equality Leak",
+      "plsql_construct": "balance validation",
+      "mutation_rule": "Tighten the sufficient-funds check so exact-balance withdrawals are rejected.",
+      "why_it_matters": "Reveals missing tests at the exact threshold where the account becomes zero.",
+      "expected_observable_effect": "A valid withdrawal is rejected when balance equals amount.",
+      "original_snippet": "IF v_balance >= p_amount THEN",
+      "mutant_snippet": "IF v_balance > p_amount THEN",
+      "tags": [
+        "plsql",
+        "withdrawal",
+        "boundary",
+        "comparison",
+        "exception"
+      ],
+      "content": "Safe Withdrawal Equality Leak targets sufficient-funds logic. The mutation changes a greater-than-or-equal comparison into a strict greater-than comparison, which rejects a legitimate exact-balance withdrawal. Good tests should include zero-balance outcomes after a successful transaction.",
+      "source": "novel"
+    }
+  },
+  {
+    "score": 65.45873978956521,
+    "reasons": [
+      "matched risk tags: transaction",
+      "category aligned with inferred risk: transaction",
+      "matched assignment keywords: 3",
+      "shares prompt vocabulary with the assignment"
+    ],
+    "document": {
+      "id": "MUT-N002",
+      "category": "transaction",
+      "mutation_name": "Close Branch Orphan Accounts",
+      "plsql_construct": "multi-step branch transfer",
+      "mutation_rule": "Reverse the safe transfer order so the branch is deleted before dependent accounts move.",
+      "why_it_matters": "Checks whether tests catch referential-integrity and ordering faults in transactional routines.",
+      "expected_observable_effect": "Foreign-key failure, orphaned accounts, or partial transfer state.",
+      "original_snippet": "UPDATE accounts SET br_no = p_new_branch WHERE br_no = p_old_branch; DELETE FROM branches WHERE br_no = p_old_branch;",
+      "mutant_snippet": "DELETE FROM branches WHERE br_no = p_old_branch; UPDATE accounts SET br_no = p_new_branch WHERE br_no = p_old_branch;",
+      "tags": [
+        "plsql",
+        "transaction",
+        "foreign_key",
+        "branch",
+        "ordering"
+      ],
+      "content": "Close Branch Orphan Accounts targets branch-closure routines. It deletes the source branch before transferring dependent accounts, which should trigger referential-integrity failures or leave the database in a partial state. This is useful for evaluating transaction-aware PL/SQL test suites.",
+      "source": "novel"
+    }
+  },
+  {
+    "score": 35.550562020143026,
+    "reasons": [
+      "matched risk tags: boundary",
+      "matched assignment keywords: 1"
+    ],
+    "document": {
+      "id": "MUT-074",
+      "category": "business_rule",
+      "mutation_name": "Threshold Tightening",
+      "plsql_construct": "validation threshold",
+      "mutation_rule": "Tighten a business threshold by one unit.",
+      "why_it_matters": "Boundary case is excluded.",
+      "expected_observable_effect": "Boundary value is rejected.",
+      "original_snippet": "IF amount <= max_amount THEN",
+      "mutant_snippet": "IF amount < max_amount THEN",
+      "tags": [
+        "plsql",
+        "business",
+        "threshold",
+        "boundary"
+      ],
+      "content": "Threshold Tightening. In PL/SQL, this mutation targets validation threshold. Original example: IF amount <= max_amount THEN Mutant example: IF amount < max_amount THEN Mutation rule: Tighten a business threshold by one unit. Why it matters: Boundary case is excluded. Expected observable effect: Boundary value is rejected.",
+      "source": "seed"
+    }
+  },
+  {
+    "score": 47.78499375509863,
+    "reasons": [
+      "matched assignment keywords: 2",
+      "shares prompt vocabulary with the assignment"
+    ],
+    "document": {
+      "id": "MUT-037",
+      "category": "sql",
+      "mutation_name": "Column Reference Mutation",
+      "plsql_construct": "SELECT column",
+      "mutation_rule": "Swap a referenced column with another compatible column.",
+      "why_it_matters": "Finds mapping mistakes between schema fields.",
+      "expected_observable_effect": "Returned value differs.",
+      "original_snippet": "SELECT account_id FROM accounts;",
+      "mutant_snippet": "SELECT customer_id FROM accounts;",
+      "tags": [
+        "plsql",
+        "sql",
+        "column",
+        "mapping"
+      ],
+      "content": "Column Reference Mutation. In PL/SQL, this mutation targets SELECT column. Original example: SELECT account_id FROM accounts; Mutant example: SELECT customer_id FROM accounts; Mutation rule: Swap a referenced column with another compatible column. Why it matters: Finds mapping mistakes between schema fields. Expected observable effect: Returned value differs.",
+      "source": "seed"
+    }
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "id": "MUT-043",
+    "mutation_name": "COMMIT Removal",
+    "category": "transaction",
+    "tags": [
+      "plsql",
+      "transaction",
+      "commit",
+      "persistence"
+    ],
+    "why_it_matters": "PL/SQL often relies on durable side effects that must be verified.",
+    "expected_observable_effect": "Changes are not persisted after execution.",
+    "lexical_score": 0.08032669186245991,
+    "focus_score": 3.0,
+    "tag_score": 0.75,
+    "category_score": 1.2,
+    "total_score": 5.03032669186246
+  },
+  {
+    "id": "MUT-051",
+    "mutation_name": "SQLCODE Branch Mutation",
+    "category": "exception",
+    "tags": [
+      "plsql",
+      "exception",
+      "sqlcode",
+      "branch"
+    ],
+    "why_it_matters": "Checks error classification coverage.",
+    "expected_observable_effect": "Wrong handler branch executes.",
+    "lexical_score": 0.2201729597179056,
+    "focus_score": 5.3,
+    "tag_score": 0.75,
+    "category_score": 1.2,
+    "total_score": 7.470172959717906
+  },
+  {
+    "id": "MUT-074",
+    "mutation_name": "Threshold Tightening",
+    "category": "business_rule",
+    "tags": [
+      "plsql",
+      "business",
+      "threshold",
+      "boundary"
+    ],
+    "why_it_matters": "Boundary case is excluded.",
+    "expected_observable_effect": "Boundary value is rejected.",
+    "lexical_score": 0.19949980517606664,
+    "focus_score": 2.5,
+    "tag_score": 1.5,
+    "category_score": 1.2,
+    "total_score": 5.399499805176067
+  },
+  {
+    "id": "MUT-050",
+    "mutation_name": "Raise Removed",
+    "category": "exception",
+    "tags": [
+      "plsql",
+      "exception",
+      "raise",
+      "validation"
+    ],
+    "why_it_matters": "Finds tests that do not verify failure paths.",
+    "expected_observable_effect": "Input is accepted when it should fail.",
+    "lexical_score": 0.16284957257922258,
+    "focus_score": 5.3,
+    "tag_score": 0,
+    "category_score": 1.2,
+    "total_score": 6.662849572579223
+  },
+  {
+    "id": "MUT-009",
+    "mutation_name": "Call-Site Boundary Value",
+    "category": "parameter",
+    "tags": [
+      "plsql",
+      "parameter",
+      "boundary",
+      "callsite"
+    ],
+    "why_it_matters": "Boundary tests are one of the highest-value checks in PL/SQL business logic.",
+    "expected_observable_effect": "Branch outcomes differ at thresholds.",
+    "lexical_score": 0.2124059299307989,
+    "focus_score": 6.0,
+    "tag_score": 0.75,
+    "category_score": 0.0,
+    "total_score": 6.9624059299307985
+  },
+  {
+    "id": "MUT-014",
+    "mutation_name": "Greater-Than to Greater-Or-Equal",
+    "category": "relational",
+    "tags": [
+      "plsql",
+      "relational",
+      "boundary",
+      "if"
+    ],
+    "why_it_matters": "Classic off-by-one mutant for thresholds.",
+    "expected_observable_effect": "Boundary case now falls into the branch.",
+    "lexical_score": 0.1988479004956337,
+    "focus_score": 6.0,
+    "tag_score": 0.75,
+    "category_score": 0.0,
+    "total_score": 6.948847900495633
+  },
+  {
+    "id": "MUT-020",
+    "mutation_name": "IF Branch Removal",
+    "category": "control_flow",
+    "tags": [
+      "plsql",
+      "control_flow",
+      "if",
+      "branch"
+    ],
+    "why_it_matters": "Checks whether a branch is truly exercised by tests.",
+    "expected_observable_effect": "No state change where one was expected.",
+    "lexical_score": 0.21733982120602025,
+    "focus_score": 3.5,
+    "tag_score": 0.75,
+    "category_score": 1.2,
+    "total_score": 5.667339821206021
+  },
+  {
+    "id": "MUT-028",
+    "mutation_name": "GOTO Target Mutation",
+    "category": "control_flow",
+    "tags": [
+      "plsql",
+      "control_flow",
+      "goto",
+      "branch"
+    ],
+    "why_it_matters": "PL/SQL supports GOTO; mutation reveals fragile flow control.",
+    "expected_observable_effect": "Control jumps to a different section.",
+    "lexical_score": 0.09775072549635808,
+    "focus_score": 3.5,
+    "tag_score": 0.75,
+    "category_score": 1.2,
+    "total_score": 5.547750725496358
+  }
+]

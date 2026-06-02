@@ -1,0 +1,126 @@
+[
+  {
+    "testcase_type": "edge_case",
+    "test_intent": "exact_balance_validation",
+    "target_operations": [
+      "SafeWithdrawal"
+    ],
+    "risk_pattern": "rollback_failure",
+    "mutation_reference": "MUT-044",
+    "behavioral_focus": [
+      "transaction_consistency_test",
+      "rollback_validation"
+    ],
+    "priority": "medium"
+  },
+  {
+    "testcase_type": "edge_case",
+    "test_intent": "insufficient_balance_validation",
+    "target_operations": [
+      "SafeWithdrawal"
+    ],
+    "risk_pattern": "rollback_failure",
+    "mutation_reference": "MUT-044",
+    "behavioral_focus": [
+      "transaction_consistency_test",
+      "rollback_validation"
+    ],
+    "priority": "medium"
+  },
+  {
+    "testcase_type": "edge_case",
+    "test_intent": "rollback_consistency_validation",
+    "target_operations": [
+      "SafeWithdrawal"
+    ],
+    "risk_pattern": "rollback_failure",
+    "mutation_reference": "MUT-044",
+    "behavioral_focus": [
+      "transaction_consistency_test",
+      "rollback_validation"
+    ],
+    "priority": "medium"
+  },
+  {
+    "testcase_type": "edge_case",
+    "test_intent": "threshold_equal_validation",
+    "target_operations": [
+      "UpdateCustomerClass"
+    ],
+    "risk_pattern": "threshold_logic_failure",
+    "mutation_reference": "MUT-074",
+    "behavioral_focus": [
+      "boundary_test",
+      "equality_test",
+      "off_by_one_test"
+    ],
+    "priority": "medium"
+  },
+  {
+    "testcase_type": "edge_case",
+    "test_intent": "threshold_minus_one_validation",
+    "target_operations": [
+      "UpdateCustomerClass"
+    ],
+    "risk_pattern": "threshold_logic_failure",
+    "mutation_reference": "MUT-074",
+    "behavioral_focus": [
+      "boundary_test",
+      "equality_test",
+      "off_by_one_test"
+    ],
+    "priority": "medium"
+  },
+  {
+    "testcase_type": "edge_case",
+    "test_intent": "threshold_plus_one_validation",
+    "target_operations": [
+      "UpdateCustomerClass"
+    ],
+    "risk_pattern": "threshold_logic_failure",
+    "mutation_reference": "MUT-074",
+    "behavioral_focus": [
+      "boundary_test",
+      "equality_test",
+      "off_by_one_test"
+    ],
+    "priority": "medium"
+  },
+  {
+    "testcase_type": "edge_case",
+    "test_intent": "dependency_transfer_validation",
+    "target_operations": [
+      "CloseBranch"
+    ],
+    "risk_pattern": "referential_integrity_failure",
+    "mutation_reference": "MUT-020",
+    "behavioral_focus": [
+      "cross_table_consistency_test"
+    ],
+    "priority": "medium"
+  },
+  {
+    "testcase_type": "normal_case",
+    "test_intent": "successful_execution",
+    "target_operations": [
+      "UpdateCustomerClass"
+    ],
+    "priority": "medium"
+  },
+  {
+    "testcase_type": "normal_case",
+    "test_intent": "successful_execution",
+    "target_operations": [
+      "CloseBranch"
+    ],
+    "priority": "medium"
+  },
+  {
+    "testcase_type": "normal_case",
+    "test_intent": "successful_execution",
+    "target_operations": [
+      "SafeWithdrawal"
+    ],
+    "priority": "medium"
+  }
+]

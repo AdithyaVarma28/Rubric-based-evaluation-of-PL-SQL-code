@@ -1,0 +1,25 @@
+{
+  "document_count": 85,
+  "category_distribution": {
+    "declaration": 6,
+    "parameter": 5,
+    "arithmetic": 2,
+    "relational": 2,
+    "logical": 2,
+    "range": 1,
+    "sql_predicate": 1,
+    "control_flow": 9,
+    "sql": 14,
+    "transaction": 4,
+    "exception": 6,
+    "cursor": 4,
+    "bulk": 2,
+    "dynamic_sql": 4,
+    "oracle_builtin": 4,
+    "sequence": 1,
+    "package_state": 3,
+    "business_rule": 6,
+    "paper_operator": 9
+  },
+  "avg_tag_count": 4.0
+}

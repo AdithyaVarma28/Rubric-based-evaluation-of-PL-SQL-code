@@ -1,0 +1,44 @@
+[
+  {
+    "name": "threshold_classification",
+    "risk_tags": [
+      "boundary",
+      "comparison",
+      "customer",
+      "threshold"
+    ],
+    "expected_behavior": "Customers above the threshold should move to class A and other customers should move to class B."
+  },
+  {
+    "name": "safe_withdrawal",
+    "risk_tags": [
+      "boundary",
+      "transaction",
+      "withdrawal",
+      "balance"
+    ],
+    "expected_behavior": "Exact-balance withdrawals should work and insufficient funds should be rejected safely."
+  },
+  {
+    "name": "branch_transfer",
+    "risk_tags": [
+      "branch",
+      "transfer",
+      "transaction",
+      "foreign_key"
+    ],
+    "expected_behavior": "Dependent accounts should move before the source branch is deleted."
+  },
+  {
+    "name": "mutation_coverage_summary",
+    "risk_tags": [
+      "transaction",
+      "exception",
+      "business_rule",
+      "parameter",
+      "relational",
+      "control_flow"
+    ],
+    "expected_behavior": "Retrieved mutations should cover multiple fault categories."
+  }
+]

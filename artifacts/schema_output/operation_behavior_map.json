@@ -1,0 +1,6 @@
+{
+  "classification_logic": "UpdateCustomerClass",
+  "boundary_validation": "UpdateCustomerClass",
+  "transaction_sensitive_operation": "SafeWithdrawal",
+  "cross_table_dependency": "CloseBranch"
+}

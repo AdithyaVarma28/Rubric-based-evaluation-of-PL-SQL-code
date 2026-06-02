@@ -1,0 +1,100 @@
+[
+  {
+    "test_case_id": "normal_customer",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "normal_branches",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "normal_accounts",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "boundary_zero_customer",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "negative_null_customer",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "boundary_zero_branches",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "negative_null_branches",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "boundary_zero_accounts",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "negative_null_accounts",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "boundary_empty_state",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "mutation_01",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "mutation_02",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "mutation_03",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  },
+  {
+    "test_case_id": "mutation_04",
+    "executed": false,
+    "passed": false,
+    "output": "Dry-run mode: execution skipped because Oracle tooling is not configured.",
+    "error": ""
+  }
+]

@@ -1,0 +1,161 @@
+[
+  {
+    "mutation_id": "MUT-044",
+    "mutation_name": "ROLLBACK Removal",
+    "risk_pattern": "rollback_failure",
+    "target_operation": "SafeWithdrawal",
+    "test_intents": [
+      "exact_balance_validation",
+      "insufficient_balance_validation",
+      "rollback_consistency_validation"
+    ],
+    "behavioral_focus": [
+      "transaction_consistency_test",
+      "rollback_validation"
+    ],
+    "priority": "medium"
+  },
+  {
+    "mutation_id": "MUT-045",
+    "mutation_name": "Savepoint Mutation",
+    "risk_pattern": "rollback_failure",
+    "target_operation": "SafeWithdrawal",
+    "test_intents": [
+      "exact_balance_validation",
+      "insufficient_balance_validation",
+      "rollback_consistency_validation"
+    ],
+    "behavioral_focus": [
+      "transaction_consistency_test",
+      "rollback_validation"
+    ],
+    "priority": "medium"
+  },
+  {
+    "mutation_id": "MUT-082",
+    "mutation_name": "Rollback Removal",
+    "risk_pattern": "rollback_failure",
+    "target_operation": "SafeWithdrawal",
+    "test_intents": [
+      "exact_balance_validation",
+      "insufficient_balance_validation",
+      "rollback_consistency_validation"
+    ],
+    "behavioral_focus": [
+      "transaction_consistency_test",
+      "rollback_validation"
+    ],
+    "priority": "medium"
+  },
+  {
+    "mutation_id": "MUT-074",
+    "mutation_name": "Threshold Tightening",
+    "risk_pattern": "threshold_logic_failure",
+    "target_operation": "UpdateCustomerClass",
+    "test_intents": [
+      "threshold_equal_validation",
+      "threshold_minus_one_validation",
+      "threshold_plus_one_validation"
+    ],
+    "behavioral_focus": [
+      "boundary_test",
+      "equality_test",
+      "off_by_one_test"
+    ],
+    "priority": "medium"
+  },
+  {
+    "mutation_id": "MUT-073",
+    "mutation_name": "Threshold Relaxation",
+    "risk_pattern": "threshold_logic_failure",
+    "target_operation": "UpdateCustomerClass",
+    "test_intents": [
+      "threshold_equal_validation",
+      "threshold_minus_one_validation",
+      "threshold_plus_one_validation"
+    ],
+    "behavioral_focus": [
+      "boundary_test",
+      "equality_test",
+      "off_by_one_test"
+    ],
+    "priority": "medium"
+  },
+  {
+    "mutation_id": "MUT-009",
+    "mutation_name": "Call-Site Boundary Value",
+    "risk_pattern": "threshold_logic_failure",
+    "target_operation": "UpdateCustomerClass",
+    "test_intents": [
+      "threshold_equal_validation",
+      "threshold_minus_one_validation",
+      "threshold_plus_one_validation"
+    ],
+    "behavioral_focus": [
+      "boundary_test",
+      "equality_test",
+      "off_by_one_test"
+    ],
+    "priority": "medium"
+  },
+  {
+    "mutation_id": "MUT-020",
+    "mutation_name": "IF Branch Removal",
+    "risk_pattern": "referential_integrity_failure",
+    "target_operation": "CloseBranch",
+    "test_intents": [
+      "dependency_transfer_validation",
+      "orphan_record_validation",
+      "cross_table_consistency_validation"
+    ],
+    "behavioral_focus": [
+      "cross_table_consistency_test"
+    ],
+    "priority": "medium"
+  },
+  {
+    "mutation_id": "MUT-017",
+    "mutation_name": "Insert NOT",
+    "risk_pattern": "referential_integrity_failure",
+    "target_operation": "CloseBranch",
+    "test_intents": [
+      "dependency_transfer_validation",
+      "orphan_record_validation",
+      "cross_table_consistency_validation"
+    ],
+    "behavioral_focus": [
+      "cross_table_consistency_test"
+    ],
+    "priority": "medium"
+  },
+  {
+    "mutation_id": "MUT-021",
+    "mutation_name": "Branch Condition Inversion",
+    "risk_pattern": "referential_integrity_failure",
+    "target_operation": "CloseBranch",
+    "test_intents": [
+      "dependency_transfer_validation",
+      "orphan_record_validation",
+      "cross_table_consistency_validation"
+    ],
+    "behavioral_focus": [
+      "cross_table_consistency_test"
+    ],
+    "priority": "medium"
+  },
+  {
+    "mutation_id": "MUT-050",
+    "mutation_name": "Raise Removed",
+    "risk_pattern": "exception_swallowing",
+    "target_operation": null,
+    "test_intents": [
+      "invalid_input_validation",
+      "exception_propagation_validation"
+    ],
+    "behavioral_focus": [
+      "exception_trigger_test",
+      "error_propagation_test"
+    ],
+    "priority": "medium"
+  }
+]

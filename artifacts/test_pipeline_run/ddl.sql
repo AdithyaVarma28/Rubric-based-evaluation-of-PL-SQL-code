@@ -1,0 +1,33 @@
+CREATE TABLE CUSTOMER (
+    cno NUMBER NOT NULL,
+    cname VARCHAR2(100) NOT NULL,
+    c_type VARCHAR2(10) NOT NULL,
+    PRIMARY KEY (cno)
+);
+
+CREATE TABLE BRANCHES (
+    br_no NUMBER NOT NULL,
+    br_name VARCHAR2(100) NOT NULL,
+    loc VARCHAR2(80) NOT NULL,
+    PRIMARY KEY (br_no)
+);
+
+CREATE TABLE ACCOUNTS (
+    ac_no NUMBER NOT NULL,
+    br_no NUMBER NOT NULL,
+    cust_no NUMBER NOT NULL,
+    ac_type VARCHAR2(30) NOT NULL,
+    bal NUMBER(10,2) NOT NULL,
+    PRIMARY KEY (ac_no),
+    CONSTRAINT chk_positive_balance CHECK (bal >= 0)
+);
+
+ALTER TABLE ACCOUNTS
+ADD CONSTRAINT fk_accounts_branches
+FOREIGN KEY (br_no)
+REFERENCES BRANCHES (br_no);
+
+ALTER TABLE ACCOUNTS
+ADD CONSTRAINT fk_accounts_customer
+FOREIGN KEY (cust_no)
+REFERENCES CUSTOMER (cno);
